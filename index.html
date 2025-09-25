@@ -161,7 +161,23 @@
         .produto:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
         .produto img { width: 100%; height: 220px; object-fit: cover; border-bottom: 2px solid #f5d76e; }
         .produto h3 { margin: 0.8rem 0 0.3rem; font-size: 1.2rem; }
-        .produto p { font-size: 0.95rem; color: #444; }
+        
+        /* NOVO: Estilos para o Código e Preço separados */
+        .produto .product-code { 
+            font-size: 0.95rem; 
+            color: #444; 
+            margin: 0.2rem 0;
+            line-height: 1.2;
+        }
+        .produto .product-price-display { 
+            font-size: 1.05rem; 
+            font-weight: 600; 
+            color: #b8860b; /* Dourado */
+            margin: 0 0 0.5rem 0;
+            line-height: 1.2;
+        }
+        /* Fim dos novos estilos */
+        
         .btn { display: inline-block; margin-top: 0.8rem; padding: 0.5rem 1rem; border: 1px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 6px; font-weight: 500; transition: 0.3s; background: none; cursor: pointer; }
         .btn:hover { background: #d4af37; color: #111; }
         .btn-whatsapp { background: #25D366; color: #fff; border: 1px solid #25D366; }
@@ -244,91 +260,106 @@
             <div class="produto" data-nome="Anel Vivara V" data-cod="92272316" data-preco="149.90" data-img="https://i.imgur.com/uAWlwn1.png">
                 <img src="https://i.imgur.com/uAWlwn1.png" alt="Anel Vivara V">
                 <h3>Anel Vivara V</h3>
-                <p>Cod: 92272316 | R$ 149,90</p>
+                <p class="product-code">Cód: 92272316</p>
+                <p class="product-price-display">R$ 149,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Vega" data-cod="12743445" data-preco="89.00" data-img="https://i.imgur.com/Y5gFznY.png">
                 <img src="https://i.imgur.com/Y5gFznY.png" alt="Anel Vega">
                 <h3>Anel Vega</h3>
-                <p>Cod: 12743445 | R$ 89,00</p>
+                <p class="product-code">Cód: 12743445</p>
+                <p class="product-price-display">R$ 89,00</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Três Fileiras" data-cod="91239327" data-preco="94.90" data-img="https://i.imgur.com/iJ0VyBz.png">
                 <img src="https://i.imgur.com/iJ0VyBz.png" alt="Anel Três Fileiras">
                 <h3>Anel Três Fileiras</h3>
-                <p>Cod: 91239327 | R$ 94,90</p>
+                <p class="product-code">Cód: 91239327</p>
+                <p class="product-price-display">R$ 94,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Toque de Amor" data-cod="14116544" data-preco="79.00" data-img="https://i.imgur.com/3oTzD82.png">
                 <img src="https://i.imgur.com/3oTzD82.png" alt="Anel Toque de Amor">
                 <h3>Anel Toque de Amor</h3>
-                <p>Cod: 14116544 | R$ 79,00</p>
+                <p class="product-code">Cód: 14116544</p>
+                <p class="product-price-display">R$ 79,00</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Rubi" data-cod="19696379" data-preco="99.90" data-img="https://i.imgur.com/I2pXqEj.png">
                 <img src="https://i.imgur.com/I2pXqEj.png" alt="Anel Rubi">
                 <h3>Anel Rubi</h3>
-                <p>Cod: 19696379 | R$ 99,90</p>
+                <p class="product-code">Cód: 19696379</p>
+                <p class="product-price-display">R$ 99,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Mini Coração" data-cod="19264891" data-preco="119.90" data-img="https://i.imgur.com/NeZsgXT.png">
                 <img src="https://i.imgur.com/NeZsgXT.png" alt="Anel Mini Coração">
                 <h3>Anel Mini Coração</h3>
-                <p>Cod: 19264891 | R$ 119,90</p>
+                <p class="product-code">Cód: 19264891</p>
+                <p class="product-price-display">R$ 119,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Maya" data-cod="6577022" data-preco="89.00" data-img="https://i.imgur.com/JVH56Rl.png">
                 <img src="https://i.imgur.com/JVH56Rl.png" alt="Anel Maya">
                 <h3>Anel Maya</h3>
-                <p>Cod: 6577022 | R$ 89,00</p>
+                <p class="product-code">Cód: 6577022</p>
+                <p class="product-price-display">R$ 89,00</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Libra" data-cod="5654016" data-preco="79.00" data-img="https://i.imgur.com/P6UeGCc.png">
                 <img src="https://i.imgur.com/P6UeGCc.png" alt="Anel Libra">
                 <h3>Anel Libra</h3>
-                <p>Cod: 5654016 | R$ 79,00</p>
+                <p class="product-code">Cód: 5654016</p>
+                <p class="product-price-display">R$ 79,00</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Ipanema" data-cod="54793699" data-preco="119.90" data-img="https://i.imgur.com/hdDRrmj.png">
                 <img src="https://i.imgur.com/hdDRrmj.png" alt="Anel Ipanema">
                 <h3>Anel Ipanema</h3>
-                <p>Cod: 54793699 | R$ 119,90</p>
+                <p class="product-code">Cód: 54793699</p>
+                <p class="product-price-display">R$ 119,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Icona" data-cod="89103623" data-preco="139.90" data-img="https://i.imgur.com/puugtHW.png">
                 <img src="https://i.imgur.com/puugtHW.png" alt="Anel Icona">
                 <h3>Anel Icona</h3>
-                <p>Cod: 89103623 | R$ 139,90</p>
+                <p class="product-code">Cód: 89103623</p>
+                <p class="product-price-display">R$ 139,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Heloisa" data-cod="79192064" data-preco="69.90" data-img="https://i.imgur.com/kHpRDNv.png">
                 <img src="https://i.imgur.com/kHpRDNv.png" alt="Anel Heloisa">
                 <h3>Anel Heloisa</h3>
-                <p>Cod: 79192064 | R$ 69,90</p>
+                <p class="product-code">Cód: 79192064</p>
+                <p class="product-price-display">R$ 69,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Elisa" data-cod="437295517" data-preco="59.00" data-img="https://i.imgur.com/aaed5vR.png">
                 <img src="https://i.imgur.com/aaed5vR.png" alt="Anel Elisa">
                 <h3>Anel Elisa</h3>
-                <p>Cod: 437295517 | R$ 59,00</p>
+                <p class="product-code">Cód: 437295517</p>
+                <p class="product-price-display">R$ 59,00</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Celeste" data-cod="78803824" data-preco="79.00" data-img="https://i.imgur.com/SHDStYV.png">
                 <img src="https://i.imgur.com/SHDStYV.png" alt="Anel Celeste">
                 <h3>Anel Celeste</h3>
-                <p>Cod: 78803824 | R$ 79,00</p>
+                <p class="product-code">Cód: 78803824</p>
+                <p class="product-price-display">R$ 79,00</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Cartier" data-cod="37373740" data-preco="124.00" data-img="https://i.imgur.com/yTvKWKG.png">
                 <img src="https://i.imgur.com/yTvKWKG.png" alt="Anel Cartier">
                 <h3>Anel Cartier</h3>
-                <p>Cod: 37373740 | R$ 124,00</p>
+                <p class="product-code">Cód: 37373740</p>
+                <p class="product-price-display">R$ 124,00</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Anel Amuleto" data-cod="75082604" data-preco="75.00" data-img="https://i.imgur.com/Oorxm6L.png">
                 <img src="https://i.imgur.com/Oorxm6L.png" alt="Anel Amuleto">
                 <h3>Anel Amuleto</h3>
-                <p>Cod: 75082604 | R$ 75,00</p>
+                <p class="product-code">Cód: 75082604</p>
+                <p class="product-price-display">R$ 75,00</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             
@@ -341,73 +372,85 @@
             <div class="produto" data-nome="Brinco Trevo Green" data-cod="10126424" data-preco="59.90" data-img="https://i.imgur.com/kz2SnRM.png">
                 <img src="https://i.imgur.com/kz2SnRM.png" alt="Brinco Trevo Green">
                 <h3>Brinco Trevo Green</h3>
-                <p>Cod: 10126424 | R$ 59,90</p>
+                <p class="product-code">Cód: 10126424</p>
+                <p class="product-price-display">R$ 59,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Brinco Argola Cruz" data-cod="54781542" data-preco="57.90" data-img="https://i.imgur.com/KbT9A71.png">
                 <img src="https://i.imgur.com/KbT9A71.png" alt="Brinco Argola Cruz">
                 <h3>Brinco Argola Cruz</h3>
-                <p>Cod: 54781542 | R$ 57,90</p>
+                <p class="product-code">Cód: 54781542</p>
+                <p class="product-price-display">R$ 57,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Brinco Argola Curva" data-cod="45973512" data-preco="79.90" data-img="https://i.imgur.com/cDNNqJN.png">
                 <img src="https://i.imgur.com/cDNNqJN.png" alt="Brinco Argola Curva">
                 <h3>Brinco Argola Curva</h3>
-                <p>Cod: 45973512 | R$ 79,90</p>
+                <p class="product-code">Cód: 45973512</p>
+                <p class="product-price-display">R$ 79,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Brinco Argola Rosi M" data-cod="45931802" data-preco="59.90" data-img="https://i.imgur.com/mklF63n.png">
                 <img src="https://i.imgur.com/mklF63n.png" alt="Brinco Argola Rosi M">
                 <h3>Brinco Argola Rosi M</h3>
-                <p>Cod: 45931802 | R$ 59,90</p>
+                <p class="product-code">Cód: 45931802</p>
+                <p class="product-price-display">R$ 59,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Brinco Borboleta Thy" data-cod="60267788" data-preco="129.90" data-img="https://i.imgur.com/QAEC0CZ.png">
                 <img src="https://i.imgur.com/QAEC0CZ.png" alt="Brinco Borboleta Thy">
                 <h3>Brinco Borboleta Thy</h3>
-                <p>Cod: 60267788 | R$ 129,90</p>
+                <p class="product-code">Cód: 60267788</p>
+                <p class="product-price-display">R$ 129,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Brinco Coração Clin" data-cod="97562238" data-preco="67.00" data-img="https://i.imgur.com/Bjr3eKr.png">
                 <img src="https://i.imgur.com/Bjr3eKr.png" alt="Brinco Coração Clin">
                 <h3>Brinco Coração Clin</h3>
-                <p>Cod: 97562238 | R$ 67,00</p>
+                <p class="product-code">Cód: 97562238</p>
+                <p class="product-price-display">R$ 67,00</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Brinco Coração" data-cod="76966064" data-preco="87.90" data-img="https://i.imgur.com/rzvSmb6.png">
                 <img src="https://i.imgur.com/rzvSmb6.png" alt="Brinco Coração">
                 <h3>Brinco Coração</h3>
-                <p>Cod: 76966064 | R$ 87,90</p>
+                <p class="product-code">Cód: 76966064</p>
+                <p class="product-price-display">R$ 87,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Brinco Coração" data-cod="91791153" data-preco="29.90" data-img="https://i.imgur.com/gwLAunA.png">
                 <img src="https://i.imgur.com/gwLAunA.png" alt="Brinco Coração">
                 <h3>Brinco Coração</h3>
-                <p>Cod: 91791153 | R$ 29,90</p>
+                <p class="product-code">Cód: 91791153</p>
+                <p class="product-price-display">R$ 29,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Brinco Donatella" data-cod="95573304" data-preco="74.90" data-img="https://i.imgur.com/afG3ZsH.png">
                 <img src="https://i.imgur.com/afG3ZsH.png" alt="Brinco Donatella">
                 <h3>Brinco Donatella</h3>
-                <p>Cod: 95573304 | R$ 74,90</p>
+                <p class="product-code">Cód: 95573304</p>
+                <p class="product-price-display">R$ 74,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Brinco Infinito" data-cod="44704681" data-preco="47.00" data-img="https://i.imgur.com/PeGsvKW.png">
                 <img src="https://i.imgur.com/PeGsvKW.png" alt="Brinco Infinito">
                 <h3>Brinco Infinito</h3>
-                <p>Cod: 44704681 | R$ 47,00</p>
+                <p class="product-code">Cód: 44704681</p>
+                <p class="product-price-display">R$ 47,00</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Brinco Luz" data-cod="88352312" data-preco="27.00" data-img="https://i.imgur.com/URX2L7j.jpeg">
                 <img src="https://i.imgur.com/URX2L7j.jpeg" alt="Brinco Luz">
                 <h3>Brinco Luz</h3>
-                <p>Cod: 88352312 | R$ 27,00</p>
+                <p class="product-code">Cód: 88352312</p>
+                <p class="product-price-display">R$ 27,00</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Brinco Rose" data-cod="23137837" data-preco="49.90" data-img="https://i.imgur.com/axq5r5z.png">
                 <img src="https://i.imgur.com/axq5r5z.png" alt="Brinco Rose">
                 <h3>Brinco Rose</h3>
-                <p>Cod: 23137837 | R$ 49,90</p>
+                <p class="product-code">Cód: 23137837</p>
+                <p class="product-price-display">R$ 49,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
         </div>
@@ -419,37 +462,43 @@
             <div class="produto" data-nome="Colar Luxo" data-cod="C001" data-preco="199.90" data-img="https://picsum.photos/400/300?random=11">
                 <img src="https://picsum.photos/400/300?random=11" alt="Colar Luxo">
                 <h3>Colar Luxo</h3>
-                <p>Cod: C001 | R$ 199,90</p>
+                <p class="product-code">Cód: C001</p>
+                <p class="product-price-display">R$ 199,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Colar Pérola" data-cod="C002" data-preco="139.90" data-img="https://picsum.photos/400/300?random=12">
                 <img src="https://picsum.photos/400/300?random=12" alt="Colar Pérola">
                 <h3>Colar Pérola</h3>
-                <p>Cod: C002 | R$ 139,90</p>
+                <p class="product-code">Cód: C002</p>
+                <p class="product-price-display">R$ 139,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Colar Esmeralda" data-cod="C003" data-preco="169.90" data-img="https://picsum.photos/400/300?random=13">
                 <img src="https://picsum.photos/400/300?random=13" alt="Colar Esmeralda">
                 <h3>Colar Esmeralda</h3>
-                <p>Cod: C003 | R$ 169,90</p>
+                <p class="product-code">Cód: C003</p>
+                <p class="product-price-display">R$ 169,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Colar Diamante" data-cod="C004" data-preco="229.90" data-img="https://picsum.photos/400/300?random=14">
                 <img src="https://picsum.photos/400/300?random=14" alt="Colar Diamante">
                 <h3>Colar Diamante</h3>
-                <p>Cod: C004 | R$ 229,90</p>
+                <p class="product-code">Cód: C004</p>
+                <p class="product-price-display">R$ 229,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Colar Coração" data-cod="C005" data-preco="119.90" data-img="https://picsum.photos/400/300?random=15">
                 <img src="https://picsum.photos/400/300?random=15" alt="Colar Coração">
                 <h3>Colar Coração</h3>
-                <p>Cod: C005 | R$ 119,90</p>
+                <p class="product-code">Cód: C005</p>
+                <p class="product-price-display">R$ 119,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Colar Riviera" data-cod="C006" data-preco="259.90" data-img="https://picsum.photos/400/300?random=23">
                 <img src="https://picsum.photos/400/300?random=23" alt="Colar Riviera">
                 <h3>Colar Riviera</h3>
-                <p>Cod: C006 | R$ 259,90</p>
+                <p class="product-code">Cód: C006</p>
+                <p class="product-price-display">R$ 259,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
         </div>
@@ -461,37 +510,43 @@
             <div class="produto" data-nome="Pulseira Luxo" data-cod="P001" data-preco="149.90" data-img="https://picsum.photos/400/300?random=16">
                 <img src="https://picsum.photos/400/300?random=16" alt="Pulseira Luxo">
                 <h3>Pulseira Luxo</h3>
-                <p>Cod: P001 | R$ 149,90</p>
+                <p class="product-code">Cód: P001</p>
+                <p class="product-price-display">R$ 149,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Pulseira Pérola" data-cod="P002" data-preco="99.90" data-img="https://picsum.photos/400/300?random=17">
                 <img src="https://picsum.photos/400/300?random=17" alt="Pulseira Pérola">
                 <h3>Pulseira Pérola</h3>
-                <p>Cod: P002 | R$ 99,90</p>
+                <p class="product-code">Cód: P002</p>
+                <p class="product-price-display">R$ 99,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Pulseira Ouro" data-cod="P003" data-preco="189.90" data-img="https://picsum.photos/400/300?random=18">
                 <img src="https://picsum.photos/400/300?random=18" alt="Pulseira Ouro">
                 <h3>Pulseira Ouro</h3>
-                <p>Cod: P003 | R$ 189,90</p>
+                <p class="product-code">Cód: P003</p>
+                <p class="product-price-display">R$ 189,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Pulseira Coração" data-cod="P004" data-preco="129.90" data-img="https://picsum.photos/400/300?random=19">
                 <img src="https://picsum.photos/400/300?random=19" alt="Pulseira Coração">
                 <h3>Pulseira Coração</h3>
-                <p>Cod: P004 | R$ 129,90</p>
+                <p class="product-code">Cód: P004</p>
+                <p class="product-price-display">R$ 129,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Pulseira Charme" data-cod="P005" data-preco="139.90" data-img="https://picsum.photos/400/300?random=20">
                 <img src="https://picsum.photos/400/300?random=20" alt="Pulseira Charme">
                 <h3>Pulseira Charme</h3>
-                <p>Cod: P005 | R$ 139,90</p>
+                <p class="product-code">Cód: P005</p>
+                <p class="product-price-display">R$ 139,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
             <div class="produto" data-nome="Pulseira Elo" data-cod="P006" data-preco="109.90" data-img="https://picsum.photos/400/300?random=24">
                 <img src="https://picsum.photos/400/300?random=24" alt="Pulseira Elo">
                 <h3>Pulseira Elo</h3>
-                <p>Cod: P006 | R$ 109,90</p>
+                <p class="product-code">Cód: P006</p>
+                <p class="product-price-display">R$ 109,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
         </div>
