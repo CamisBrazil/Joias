@@ -100,20 +100,19 @@
         }
         /* FIM EFEITO SHINE */
         
-        /* NOVO: REGRAS PARA O HERO H2 (Dourado sem Brilho) */
+        /* NOVO: REGRAS PARA O HERO H2 (Dourado Fixo e Responsivo) */
         .hero h2 {
             font-size: 2rem; 
             margin-bottom: 1rem; 
-            /* Aplica o gradiente de COR, mas desativa o posicionamento do Shine */
+            /* Aplica o gradiente de COR sem o 'white-space: nowrap' */
             background: linear-gradient(45deg, #d4af37, #f5d76e, #b8860b);
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
-            white-space: nowrap;
-            /* Garante que o container do Hero use o texto corretamente */
+            /* REMOVIDO: white-space: nowrap; */
             display: block; 
             text-align: center;
         }
-        .hero p { color: #444; } /* Cor padrão do parágrafo */
+        .hero p { color: #444; }
 
 
         /* ===== BOTÃO FLUTUANTE (NOVO) ===== */
