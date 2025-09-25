@@ -29,7 +29,7 @@
         
         .menu-toggle { display: none !important; } 
         
-        /* Contador do Carrinho no Topo */
+        /* Contador do Carrinho no Topo (CORREÇÃO VISUAL AQUI) */
         .cart-count { 
             background: #d4af37; 
             color: #fff; 
@@ -40,6 +40,10 @@
             line-height: 1.2;
             cursor: pointer;
             transition: background 0.3s;
+            /* Garante que o contador apareça sempre */
+            display: inline-block;
+            min-width: 25px; 
+            text-align: center;
         }
         .cart-count:hover {
             background: #b8860b;
@@ -138,14 +142,13 @@
                 margin-bottom: 2px;
             }
 
-            /* Estilo de Grid 2x para mobile (CORREÇÃO FINAL DO CONFLITO) */
+            /* Estilo de Grid 2x para mobile */
             .produtos {
-                /* Força duas colunas de tamanho igual */
                 grid-template-columns: repeat(2, 1fr); 
-                gap: 0.8rem; /* Reduz o gap para ajudar a caber 2 */
+                gap: 0.8rem; 
             }
             .produto {
-                padding-bottom: 0.5rem; /* Reduz o padding inferior do produto */
+                padding-bottom: 0.5rem; 
             }
             .produto img { height: 150px; }
             .produto h3 { font-size: 1rem; }
@@ -473,7 +476,7 @@
             // 3. Atualiza o total
             carrinhoTotal.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
             
-            // 4. Configura o link de finalização para o WhatsApp
+            // 4. Configura o link de finalização para o WhatsApp, incluindo a URL da imagem de CADA item.
             generateWhatsAppOrder(total);
         }
 
@@ -483,9 +486,13 @@
             if (carrinho.length === 0) {
                 message = "Olá! Gostaria de mais informações sobre seus produtos.";
             } else {
-                carrinho.forEach(item => {
+                carrinho.forEach((item, index) => {
                     const itemTotal = item.preco * item.qtd;
-                    message += `${item.qtd}x ${item.nome} (Cod: ${item.cod}) - R$ ${itemTotal.toFixed(2).replace('.', ',')}\n`;
+                    // Adiciona a URL da imagem no final da linha do item
+                    message += `${item.qtd}x ${item.nome} (Cod: ${item.cod}) - R$ ${itemTotal.toFixed(2).replace('.', ',')}\nLink da Imagem: ${item.img}\n`;
+                    if (index < carrinho.length - 1) {
+                         message += "-----\n";
+                    }
                 });
                 message += `\n*Total do Pedido: R$ ${total.toFixed(2).replace('.', ',')}*`;
                 message += "\n\nPor favor, me informe o valor e opções de frete. Obrigado(a)!";
@@ -527,7 +534,7 @@
                     nome: produto.dataset.nome,
                     cod: produto.dataset.cod,
                     preco: parseFloat(produto.dataset.preco),
-                    img: produto.dataset.img
+                    img: produto.dataset.img // Adicionando a URL da imagem ao objeto
                 };
 
                 // Preenche o modal do produto
@@ -537,7 +544,7 @@
                 modalPreco.textContent = "Preço: R$ " + produtoSelecionado.preco.toFixed(2).replace('.', ',');
 
                 // Configura o link do WhatsApp para "Comprar Apenas Este" com o NOVO NÚMERO
-                const singleItemMessage = `Olá, quero comprar *apenas* o produto ${produtoSelecionado.nome} (Cod: ${produtoSelecionado.cod}). Qual o frete?`;
+                const singleItemMessage = `Olá, quero comprar *apenas* o produto ${produtoSelecionado.nome} (Cod: ${produtoSelecionado.cod}). Link da Imagem: ${produtoSelecionado.img}. Qual o frete?`;
                 btnWhatsappModal.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(singleItemMessage)}`;
             });
         });
