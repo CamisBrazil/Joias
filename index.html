@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>By CamisBrazil - Semi Joias</title>
+  <!-- Fonte manuscrita elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+
+    body { background: #fafafa; color: #111; line-height: 1.6; }
+
+    /* ===== NAV ===== */
+    nav { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #ddd; z-index: 1000; }
+    .nav-container { max-width: 1200px; margin: auto; padding: 0.8rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Great Vibes', cursive; font-size: 2rem; background: linear-gradient(45deg, #d4af37, #f5d76e, #b8860b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; white-space: nowrap; }
+    .links { display: flex; gap: 2rem; }
+    .links a { color: #111; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .links a:hover { color: #d4af37; }
+    .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; }
+
+    /* ===== HEADER ===== */
+    header { text-align: center; padding: 2.5rem 1rem; background: #f1f1f1; }
+    header h1 { font-family: 'Great Vibes', cursive; font-size: 3rem; background: linear-gradient(45deg, #d4af37, #f5d76e, #b8860b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    header p { margin-top: 0.5rem; color: #444; }
+
+    /* ===== HERO ===== */
+    .hero { padding: 2rem; text-align: center; }
+    .hero h2 { color: #b8860b; font-size: 2rem; margin-bottom: 1rem; }
+    .hero p { max-width: 600px; margin: auto; font-size: 1rem; color: #333; }
+
+    /* ===== PRODUTOS ===== */
+    section.categoria { padding: 2rem 1rem; }
+    section.categoria h2 { text-align: center; margin-bottom: 1.5rem; font-size: 2rem; color: #b8860b; }
+    .produtos { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 1.5rem; }
+    .produto { background: #fff; border-radius: 16px; overflow: hidden; text-align: center; padding-bottom: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; }
+    .produto:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .produto img { width: 100%; height: 220px; object-fit: cover; border-bottom: 2px solid #f5d76e; }
+    .produto h3 { margin: 0.8rem 0 0.3rem; font-size: 1.2rem; }
+    .produto p { font-size: 0.95rem; color: #444; }
+    .btn { display: inline-block; margin-top: 0.8rem; padding: 0.5rem 1rem; border: 1px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 6px; font-weight: 500; transition: 0.3s; }
+    .btn:hover { background: #d4af37; color: #111; }
+
+    /* ===== MODAL ===== */
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s; padding: 1rem; }
+    .modal.open { opacity: 1; visibility: visible; }
+    .modal-content { background: #fff; padding: 1rem; border-radius: 12px; max-width: 400px; width: 100%; text-align: center; position: relative; }
+    .modal img { max-width: 100%; border-radius: 8px; margin-bottom: 1rem; }
+    .modal h3 { margin-bottom: 0.5rem; font-size: 1.4rem; color: #b8860b; }
+    .modal p { font-size: 1rem; color: #333; }
+    .close-btn { position: absolute; top: 10px; right: 15px; font-size: 1.8rem; cursor: pointer; color: #333; }
+
+    /* ===== CONTATO ===== */
+    .contato { text-align: center; padding: 2rem; background: #f9f9f9; }
+    .contato h2 { color: #b8860b; margin-bottom: 1rem; }
+    .contato p { color: #444; font-size: 1rem; }
+    .contato a { color: #b8860b; text-decoration: none; }
+
+    footer { text-align: center; padding: 1rem; font-size: 0.9rem; color: #666; background: #eee; border-top: 1px solid #ccc; }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 768px) {
+      .links { display: none; flex-direction: column; background: #fff; position: absolute; top: 60px; right: 0; width: 200px; padding: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+      .links.show { display: flex; }
+      .menu-toggle { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-container">
+      <span class="logo">CamisBrazil</span>
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+      <div class="links" id="menu">
+        <a href="#aneis">Anéis</a>
+        <a href="#brincos">Brincos</a>
+        <a href="#colares">Colares</a>
+        <a href="#pulseiras">Pulseiras</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header>
+    <h1>By CamisBrazil</h1>
+    <p>Semi Joias Elegantes e Modernas</p>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h2>Realce sua Beleza com Elegância</h2>
+    <p>Conheça nossas coleções de semi joias exclusivas, perfeitas para cada ocasião. Qualidade, estilo e sofisticação em cada detalhe.</p>
+  </section>
+
+  <!-- CATEGORIA ANÉIS -->
+  <section id="aneis" class="categoria">
+    <h2>Anéis</h2>
+    <div class="produtos">
+      <div class="produto" data-nome="Anel Luxo" data-cod="A001" data-preco="R$ 199,90" data-img="https://picsum.photos/400/300?random=1">
+        <img src="https://picsum.photos/400/300?random=1" alt="Anel Luxo">
+        <h3>Anel Luxo</h3>
+        <p>Cod: A001 | R$ 199,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Anel Rubi" data-cod="A002" data-preco="R$ 159,90" data-img="https://picsum.photos/400/300?random=2">
+        <img src="https://picsum.photos/400/300?random=2" alt="Anel Rubi">
+        <h3>Anel Rubi</h3>
+        <p>Cod: A002 | R$ 159,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Anel Ouro" data-cod="A003" data-preco="R$ 249,90" data-img="https://picsum.photos/400/300?random=3">
+        <img src="https://picsum.photos/400/300?random=3" alt="Anel Ouro">
+        <h3>Anel Ouro</h3>
+        <p>Cod: A003 | R$ 249,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Anel Diamante" data-cod="A004" data-preco="R$ 299,90" data-img="https://picsum.photos/400/300?random=4">
+        <img src="https://picsum.photos/400/300?random=4" alt="Anel Diamante">
+        <h3>Anel Diamante</h3>
+        <p>Cod: A004 | R$ 299,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Anel Perola" data-cod="A005" data-preco="R$ 129,90" data-img="https://picsum.photos/400/300?random=5">
+        <img src="https://picsum.photos/400/300?random=5" alt="Anel Pérola">
+        <h3>Anel Pérola</h3>
+        <p>Cod: A005 | R$ 129,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIA BRINCOS -->
+  <section id="brincos" class="categoria">
+    <h2>Brincos</h2>
+    <div class="produtos">
+      <div class="produto" data-nome="Brinco Luxo" data-cod="B001" data-preco="R$ 89,90" data-img="https://picsum.photos/400/300?random=6">
+        <img src="https://picsum.photos/400/300?random=6" alt="Brinco Luxo">
+        <h3>Brinco Luxo</h3>
+        <p>Cod: B001 | R$ 89,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Brinco Pérola" data-cod="B002" data-preco="R$ 99,90" data-img="https://picsum.photos/400/300?random=7">
+        <img src="https://picsum.photos/400/300?random=7" alt="Brinco Pérola">
+        <h3>Brinco Pérola</h3>
+        <p>Cod: B002 | R$ 99,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Brinco Esmeralda" data-cod="B003" data-preco="R$ 129,90" data-img="https://picsum.photos/400/300?random=8">
+        <img src="https://picsum.photos/400/300?random=8" alt="Brinco Esmeralda">
+        <h3>Brinco Esmeralda</h3>
+        <p>Cod: B003 | R$ 129,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Brinco Cristal" data-cod="B004" data-preco="R$ 149,90" data-img="https://picsum.photos/400/300?random=9">
+        <img src="https://picsum.photos/400/300?random=9" alt="Brinco Cristal">
+        <h3>Brinco Cristal</h3>
+        <p>Cod: B004 | R$ 149,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Brinco Argola" data-cod="B005" data-preco="R$ 79,90" data-img="https://picsum.photos/400/300?random=10">
+        <img src="https://picsum.photos/400/300?random=10" alt="Brinco Argola">
+        <h3>Brinco Argola</h3>
+        <p>Cod: B005 | R$ 79,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIA COLARES -->
+  <section id="colares" class="categoria">
+    <h2>Colares</h2>
+    <div class="produtos">
+      <div class="produto" data-nome="Colar Luxo" data-cod="C001" data-preco="R$ 199,90" data-img="https://picsum.photos/400/300?random=11">
+        <img src="https://picsum.photos/400/300?random=11" alt="Colar Luxo">
+        <h3>Colar Luxo</h3>
+        <p>Cod: C001 | R$ 199,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Colar Pérola" data-cod="C002" data-preco="R$ 139,90" data-img="https://picsum.photos/400/300?random=12">
+        <img src="https://picsum.photos/400/300?random=12" alt="Colar Pérola">
+        <h3>Colar Pérola</h3>
+        <p>Cod: C002 | R$ 139,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Colar Esmeralda" data-cod="C003" data-preco="R$ 169,90" data-img="https://picsum.photos/400/300?random=13">
+        <img src="https://picsum.photos/400/300?random=13" alt="Colar Esmeralda">
+        <h3>Colar Esmeralda</h3>
+        <p>Cod: C003 | R$ 169,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Colar Diamante" data-cod="C004" data-preco="R$ 229,90" data-img="https://picsum.photos/400/300?random=14">
+        <img src="https://picsum.photos/400/300?random=14" alt="Colar Diamante">
+        <h3>Colar Diamante</h3>
+        <p>Cod: C004 | R$ 229,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Colar Coração" data-cod="C005" data-preco="R$ 119,90" data-img="https://picsum.photos/400/300?random=15">
+        <img src="https://picsum.photos/400/300?random=15" alt="Colar Coração">
+        <h3>Colar Coração</h3>
+        <p>Cod: C005 | R$ 119,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIA PULSEIRAS -->
+  <section id="pulseiras" class="categoria">
+    <h2>Pulseiras</h2>
+    <div class="produtos">
+      <div class="produto" data-nome="Pulseira Luxo" data-cod="P001" data-preco="R$ 149,90" data-img="https://picsum.photos/400/300?random=16">
+        <img src="https://picsum.photos/400/300?random=16" alt="Pulseira Luxo">
+        <h3>Pulseira Luxo</h3>
+        <p>Cod: P001 | R$ 149,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Pulseira Pérola" data-cod="P002" data-preco="R$ 99,90" data-img="https://picsum.photos/400/300?random=17">
+        <img src="https://picsum.photos/400/300?random=17" alt="Pulseira Pérola">
+        <h3>Pulseira Pérola</h3>
+        <p>Cod: P002 | R$ 99,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Pulseira Ouro" data-cod="P003" data-preco="R$ 189,90" data-img="https://picsum.photos/400/300?random=18">
+        <img src="https://picsum.photos/400/300?random=18" alt="Pulseira Ouro">
+        <h3>Pulseira Ouro</h3>
+        <p>Cod: P003 | R$ 189,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Pulseira Coração" data-cod="P004" data-preco="R$ 129,90" data-img="https://picsum.photos/400/300?random=19">
+        <img src="https://picsum.photos/400/300?random=19" alt="Pulseira Coração">
+        <h3>Pulseira Coração</h3>
+        <p>Cod: P004 | R$ 129,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+      <div class="produto" data-nome="Pulseira Charme" data-cod="P005" data-preco="R$ 139,90" data-img="https://picsum.photos/400/300?random=20">
+        <img src="https://picsum.photos/400/300?random=20" alt="Pulseira Charme">
+        <h3>Pulseira Charme</h3>
+        <p>Cod: P005 | R$ 139,90</p>
+        <a href="#" class="btn">Ver Detalhes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="contato">
+    <h2>Entre em Contato</h2>
+    <p>Fale conosco pelo WhatsApp: <a href="https://wa.me/5599999999999">Clique aqui</a></p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 By CamisBrazil. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- MODAL PRODUTO -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <img src="" alt="" id="modal-img">
+      <h3 id="modal-nome"></h3>
+      <p id="modal-cod"></p>
+      <p id="modal-preco"></p>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    // Menu responsivo
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('show');
+    });
+
+    // Modal Produto
+    const produtos = document.querySelectorAll('.produto');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalNome = document.getElementById('modal-nome');
+    const modalCod = document.getElementById('modal-cod');
+    const modalPreco = document.getElementById('modal-preco');
+    const closeModal = document.getElementById('closeModal');
+
+    produtos.forEach(produto => {
+      produto.querySelector('.btn').addEventListener('click', e => {
+        e.preventDefault();
+        modal.classList.add('open');
+        modalImg.src = produto.dataset.img;
+        modalNome.textContent = produto.dataset.nome;
+        modalCod.textContent = "Código: " + produto.dataset.cod;
+        modalPreco.textContent = "Preço: " + produto.dataset.preco;
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('open');
+    });
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.classList.remove('open');
+    });
+  </script>
+</body>
+</html>
