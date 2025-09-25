@@ -94,7 +94,7 @@
             overflow-y: auto; 
         }
         
-        /* NOVO ESTILO: Imagem dentro do modal */
+        /* Imagem dentro do modal */
         .modal img { 
             max-width: 100%; 
             border-radius: 8px; 
@@ -120,12 +120,13 @@
             display: none; /* Esconde o botão &times; original */
         } 
 
-        /* NOVO ESTILO: Botão de Fechar Flutuante (CORRIGIDO) */
+        /* NOVO ESTILO: Botão de Fechar Flutuante (CORRIGIDO PARA A DIREITA) */
         #floating-close-btn {
             position: sticky; 
             top: 5px; 
-            left: 100%;
-            transform: translateX(-100%);
+            right: 10px; /* Alinha à direita */
+            /* left: 100%; */ /* Removido */
+            /* transform: translateX(-100%); */ /* Removido */
             padding: 5px 10px;
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid #b8860b; 
@@ -136,6 +137,9 @@
             color: #b8860b;
             z-index: 100; 
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-left: auto; /* Garante que ele empurre para a direita */
+            display: block; /* Para margin-left: auto funcionar */
+            width: fit-content; /* Ajusta a largura ao conteúdo */
         }
         #floating-close-btn:hover {
             background: #f5f5f5;
