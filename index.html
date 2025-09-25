@@ -13,11 +13,28 @@
         /* ===== NAV ===== */
         nav { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #ddd; z-index: 1000; }
         .nav-container { max-width: 1200px; margin: auto; padding: 0.8rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo-area { display: flex; align-items: center; gap: 1rem; } /* Novo para alinhar logo e contador */
         .logo { font-family: 'Great Vibes', cursive; font-size: 2rem; background: linear-gradient(45deg, #d4af37, #f5d76e, #b8860b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; white-space: nowrap; }
         .links { display: flex; gap: 2rem; }
         .links a { color: #111; text-decoration: none; font-weight: 500; transition: color 0.3s; }
         .links a:hover { color: #d4af37; }
         .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; }
+        
+        /* Contador do Carrinho */
+        .cart-count { 
+            background: #d4af37; 
+            color: #fff; 
+            border-radius: 50%; 
+            padding: 2px 8px; 
+            font-size: 0.8rem; 
+            font-weight: 700;
+            line-height: 1.2;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .cart-count:hover {
+            background: #b8860b;
+        }
 
         /* ===== HEADER ===== */
         header { text-align: center; padding: 2.5rem 1rem; background: #f1f1f1; }
@@ -49,33 +66,50 @@
             border-radius: 6px; 
             font-weight: 500; 
             transition: 0.3s;
-            background: none; /* Adicionado para resetar o estilo padrão do botão */
+            background: none; 
             cursor: pointer;
         }
         .btn:hover { background: #d4af37; color: #111; }
-        /* Estilo específico para o botão do WhatsApp no modal */
+        
         .btn-whatsapp {
-            background: #25D366; /* Cor do WhatsApp */
+            background: #25D366; 
             color: #fff;
             border: 1px solid #25D366;
-            margin-left: 0.5rem;
         }
         .btn-whatsapp:hover {
-            background: #128C7E; /* Tom mais escuro no hover */
+            background: #128C7E; 
             border: 1px solid #128C7E;
             color: #fff;
         }
 
+        /* Botão Adicionar ao Carrinho no Modal */
+        #modal-add-carrinho {
+             background: #b8860b; 
+             color: #fff; 
+             border: 1px solid #b8860b;
+        }
+        #modal-add-carrinho:hover {
+             background: #d4af37; 
+             color: #111;
+        }
 
-        /* ===== MODAL ===== */
+
+        /* ===== MODAL GERAL (PRODUTO E CARRINHO) ===== */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s; padding: 1rem; }
         .modal.open { opacity: 1; visibility: visible; }
-        .modal-content { background: #fff; padding: 1rem; border-radius: 12px; max-width: 400px; width: 100%; text-align: center; position: relative; }
+        .modal-content { background: #fff; padding: 1rem; border-radius: 12px; max-width: 450px; width: 100%; text-align: center; position: relative; }
         .modal img { max-width: 100%; border-radius: 8px; margin-bottom: 1rem; }
         .modal h3 { margin-bottom: 0.5rem; font-size: 1.4rem; color: #b8860b; }
         .modal p { font-size: 1rem; color: #333; }
-        .modal-buttons { margin-top: 1rem; display: flex; justify-content: center; gap: 10px; } /* Adicionado para organizar os botões no modal */
+        .modal-buttons { margin-top: 1rem; display: flex; justify-content: center; gap: 10px; } 
         .close-btn { position: absolute; top: 10px; right: 15px; font-size: 1.8rem; cursor: pointer; color: #333; }
+
+        /* Estilos do Carrinho (novo) */
+        #carrinho-items { text-align: left; margin-top: 1rem; max-height: 300px; overflow-y: auto; border-top: 1px solid #eee; padding-top: 10px;}
+        .carrinho-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dotted #ccc; font-size: 0.9rem; }
+        .carrinho-item span { color: #555; }
+        #carrinho-total { font-weight: 700; font-size: 1.1rem; margin-top: 10px; text-align: right; color: #b8860b; }
+
 
         /* ===== CONTATO ===== */
         .contato { text-align: center; padding: 2rem; background: #f9f9f9; }
@@ -92,21 +126,21 @@
             .menu-toggle { display: block; }
             /* Grid 2x para celular */
             .produtos {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajustado para 2 colunas menores */
-                gap: 1rem; /* Reduz o espaçamento entre produtos */
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+                gap: 1rem; 
             }
             .produto img {
-                height: 150px; /* Reduz a altura da imagem para caber melhor */
+                height: 150px; 
             }
             .produto h3 {
-                font-size: 1rem; /* Reduz o tamanho do título */
+                font-size: 1rem; 
             }
             .produto p {
-                font-size: 0.8rem; /* Reduz o tamanho da descrição */
+                font-size: 0.8rem; 
             }
             .btn {
-                padding: 0.4rem 0.8rem; /* Ajusta o padding do botão */
-                font-size: 0.8rem; /* Ajusta o tamanho da fonte do botão */
+                padding: 0.4rem 0.8rem; 
+                font-size: 0.8rem; 
             }
         }
     </style>
@@ -114,7 +148,10 @@
 <body>
     <nav>
         <div class="nav-container">
-            <span class="logo">CamisBrazil</span>
+            <div class="logo-area">
+                <span class="logo">CamisBrazil</span>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
             <div class="menu-toggle" id="menu-toggle">☰</div>
             <div class="links" id="menu">
                 <a href="#aneis">Anéis</a>
@@ -139,40 +176,40 @@
     <section id="aneis" class="categoria">
         <h2>Anéis</h2>
         <div class="produtos">
-            <div class="produto" data-nome="Anel Luxo" data-cod="A001" data-preco="R$ 199,90" data-img="https://picsum.photos/400/300?random=1">
-                <img src="https://picsum.photos/400/300?random=1" alt="Anel Luxo">
-                <h3>Anel Luxo</h3>
-                <p>Cod: A001 | R$ 199,90</p>
+            <div class="produto" data-nome="Anel Elisa" data-cod="437295517" data-preco="59.00" data-img="https://picsum.photos/400/300?random=1">
+                <img src="https://picsum.photos/400/300?random=1" alt="Anel Elisa">
+                <h3>Anel Elisa</h3>
+                <p>Cod: 437295517 | R$ 59,00</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Anel Rubi" data-cod="A002" data-preco="R$ 159,90" data-img="https://picsum.photos/400/300?random=2">
-                <img src="https://picsum.photos/400/300?random=2" alt="Anel Rubi">
+            <div class="produto" data-nome="Anel Icona" data-cod="89103623" data-preco="139.90" data-img="https://picsum.photos/400/300?random=2">
+                <img src="https://picsum.photos/400/300?random=2" alt="Anel Icona">
+                <h3>Anel Icona</h3>
+                <p>Cod: 89103623 | R$ 139,90</p>
+                <button class="btn">Ver Detalhes</button>
+            </div>
+            <div class="produto" data-nome="Anel Rubi" data-cod="19696379" data-preco="99.90" data-img="https://picsum.photos/400/300?random=3">
+                <img src="https://picsum.photos/400/300?random=3" alt="Anel Rubi">
                 <h3>Anel Rubi</h3>
-                <p>Cod: A002 | R$ 159,90</p>
+                <p>Cod: 19696379 | R$ 99,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Anel Ouro" data-cod="A003" data-preco="R$ 249,90" data-img="https://picsum.photos/400/300?random=3">
-                <img src="https://picsum.photos/400/300?random=3" alt="Anel Ouro">
-                <h3>Anel Ouro</h3>
-                <p>Cod: A003 | R$ 249,90</p>
+            <div class="produto" data-nome="Anel Ipanema" data-cod="54793699" data-preco="119.90" data-img="https://picsum.photos/400/300?random=4">
+                <img src="https://picsum.photos/400/300?random=4" alt="Anel Ipanema">
+                <h3>Anel Ipanema</h3>
+                <p>Cod: 54793699 | R$ 119,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Anel Diamante" data-cod="A004" data-preco="R$ 299,90" data-img="https://picsum.photos/400/300?random=4">
-                <img src="https://picsum.photos/400/300?random=4" alt="Anel Diamante">
-                <h3>Anel Diamante</h3>
-                <p>Cod: A004 | R$ 299,90</p>
+            <div class="produto" data-nome="Anel Vivara V" data-cod="92272316" data-preco="149.90" data-img="https://picsum.photos/400/300?random=5">
+                <img src="https://picsum.photos/400/300?random=5" alt="Anel Vivara V">
+                <h3>Anel Vivara V</h3>
+                <p>Cod: 92272316 | R$ 149,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Anel Perola" data-cod="A005" data-preco="R$ 129,90" data-img="https://picsum.photos/400/300?random=5">
-                <img src="https://picsum.photos/400/300?random=5" alt="Anel Pérola">
-                <h3>Anel Pérola</h3>
-                <p>Cod: A005 | R$ 129,90</p>
-                <button class="btn">Ver Detalhes</button>
-            </div>
-            <div class="produto" data-nome="Anel Solitário" data-cod="A006" data-preco="R$ 219,90" data-img="https://picsum.photos/400/300?random=21">
-                <img src="https://picsum.photos/400/300?random=21" alt="Anel Solitário">
-                <h3>Anel Solitário</h3>
-                <p>Cod: A006 | R$ 219,90</p>
+            <div class="produto" data-nome="Anel Mini Coração" data-cod="19264891" data-preco="119.90" data-img="https://picsum.photos/400/300?random=21">
+                <img src="https://picsum.photos/400/300?random=21" alt="Anel Mini Coração">
+                <h3>Anel Mini Coração</h3>
+                <p>Cod: 19264891 | R$ 119,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
         </div>
@@ -181,37 +218,37 @@
     <section id="brincos" class="categoria">
         <h2>Brincos</h2>
         <div class="produtos">
-            <div class="produto" data-nome="Brinco Luxo" data-cod="B001" data-preco="R$ 89,90" data-img="https://picsum.photos/400/300?random=6">
+            <div class="produto" data-nome="Brinco Luxo" data-cod="B001" data-preco="89.90" data-img="https://picsum.photos/400/300?random=6">
                 <img src="https://picsum.photos/400/300?random=6" alt="Brinco Luxo">
                 <h3>Brinco Luxo</h3>
                 <p>Cod: B001 | R$ 89,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Brinco Pérola" data-cod="B002" data-preco="R$ 99,90" data-img="https://picsum.photos/400/300?random=7">
+            <div class="produto" data-nome="Brinco Pérola" data-cod="B002" data-preco="99.90" data-img="https://picsum.photos/400/300?random=7">
                 <img src="https://picsum.photos/400/300?random=7" alt="Brinco Pérola">
                 <h3>Brinco Pérola</h3>
                 <p>Cod: B002 | R$ 99,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Brinco Esmeralda" data-cod="B003" data-preco="R$ 129,90" data-img="https://picsum.photos/400/300?random=8">
+            <div class="produto" data-nome="Brinco Esmeralda" data-cod="B003" data-preco="129.90" data-img="https://picsum.photos/400/300?random=8">
                 <img src="https://picsum.photos/400/300?random=8" alt="Brinco Esmeralda">
                 <h3>Brinco Esmeralda</h3>
                 <p>Cod: B003 | R$ 129,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Brinco Cristal" data-cod="B004" data-preco="R$ 149,90" data-img="https://picsum.photos/400/300?random=9">
+            <div class="produto" data-nome="Brinco Cristal" data-cod="B004" data-preco="149.90" data-img="https://picsum.photos/400/300?random=9">
                 <img src="https://picsum.photos/400/300?random=9" alt="Brinco Cristal">
                 <h3>Brinco Cristal</h3>
                 <p>Cod: B004 | R$ 149,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Brinco Argola" data-cod="B005" data-preco="R$ 79,90" data-img="https://picsum.photos/400/300?random=10">
+            <div class="produto" data-nome="Brinco Argola" data-cod="B005" data-preco="79.90" data-img="https://picsum.photos/400/300?random=10">
                 <img src="https://picsum.photos/400/300?random=10" alt="Brinco Argola">
                 <h3>Brinco Argola</h3>
                 <p>Cod: B005 | R$ 79,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Brinco Zircônia" data-cod="B006" data-preco="R$ 119,90" data-img="https://picsum.photos/400/300?random=22">
+            <div class="produto" data-nome="Brinco Zircônia" data-cod="B006" data-preco="119.90" data-img="https://picsum.photos/400/300?random=22">
                 <img src="https://picsum.photos/400/300?random=22" alt="Brinco Zircônia">
                 <h3>Brinco Zircônia</h3>
                 <p>Cod: B006 | R$ 119,90</p>
@@ -223,37 +260,37 @@
     <section id="colares" class="categoria">
         <h2>Colares</h2>
         <div class="produtos">
-            <div class="produto" data-nome="Colar Luxo" data-cod="C001" data-preco="R$ 199,90" data-img="https://picsum.photos/400/300?random=11">
+            <div class="produto" data-nome="Colar Luxo" data-cod="C001" data-preco="199.90" data-img="https://picsum.photos/400/300?random=11">
                 <img src="https://picsum.photos/400/300?random=11" alt="Colar Luxo">
                 <h3>Colar Luxo</h3>
                 <p>Cod: C001 | R$ 199,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Colar Pérola" data-cod="C002" data-preco="R$ 139,90" data-img="https://picsum.photos/400/300?random=12">
+            <div class="produto" data-nome="Colar Pérola" data-cod="C002" data-preco="139.90" data-img="https://picsum.photos/400/300?random=12">
                 <img src="https://picsum.photos/400/300?random=12" alt="Colar Pérola">
                 <h3>Colar Pérola</h3>
                 <p>Cod: C002 | R$ 139,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Colar Esmeralda" data-cod="C003" data-preco="R$ 169,90" data-img="https://picsum.photos/400/300?random=13">
+            <div class="produto" data-nome="Colar Esmeralda" data-cod="C003" data-preco="169.90" data-img="https://picsum.photos/400/300?random=13">
                 <img src="https://picsum.photos/400/300?random=13" alt="Colar Esmeralda">
                 <h3>Colar Esmeralda</h3>
                 <p>Cod: C003 | R$ 169,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Colar Diamante" data-cod="C004" data-preco="R$ 229,90" data-img="https://picsum.photos/400/300?random=14">
+            <div class="produto" data-nome="Colar Diamante" data-cod="C004" data-preco="229.90" data-img="https://picsum.photos/400/300?random=14">
                 <img src="https://picsum.photos/400/300?random=14" alt="Colar Diamante">
                 <h3>Colar Diamante</h3>
                 <p>Cod: C004 | R$ 229,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Colar Coração" data-cod="C005" data-preco="R$ 119,90" data-img="https://picsum.photos/400/300?random=15">
+            <div class="produto" data-nome="Colar Coração" data-cod="C005" data-preco="119.90" data-img="https://picsum.photos/400/300?random=15">
                 <img src="https://picsum.photos/400/300?random=15" alt="Colar Coração">
                 <h3>Colar Coração</h3>
                 <p>Cod: C005 | R$ 119,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Colar Riviera" data-cod="C006" data-preco="R$ 259,90" data-img="https://picsum.photos/400/300?random=23">
+            <div class="produto" data-nome="Colar Riviera" data-cod="C006" data-preco="259.90" data-img="https://picsum.photos/400/300?random=23">
                 <img src="https://picsum.photos/400/300?random=23" alt="Colar Riviera">
                 <h3>Colar Riviera</h3>
                 <p>Cod: C006 | R$ 259,90</p>
@@ -265,37 +302,37 @@
     <section id="pulseiras" class="categoria">
         <h2>Pulseiras</h2>
         <div class="produtos">
-            <div class="produto" data-nome="Pulseira Luxo" data-cod="P001" data-preco="R$ 149,90" data-img="https://picsum.photos/400/300?random=16">
+            <div class="produto" data-nome="Pulseira Luxo" data-cod="P001" data-preco="149.90" data-img="https://picsum.photos/400/300?random=16">
                 <img src="https://picsum.photos/400/300?random=16" alt="Pulseira Luxo">
                 <h3>Pulseira Luxo</h3>
                 <p>Cod: P001 | R$ 149,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Pulseira Pérola" data-cod="P002" data-preco="R$ 99,90" data-img="https://picsum.photos/400/300?random=17">
+            <div class="produto" data-nome="Pulseira Pérola" data-cod="P002" data-preco="99.90" data-img="https://picsum.photos/400/300?random=17">
                 <img src="https://picsum.photos/400/300?random=17" alt="Pulseira Pérola">
                 <h3>Pulseira Pérola</h3>
                 <p>Cod: P002 | R$ 99,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Pulseira Ouro" data-cod="P003" data-preco="R$ 189,90" data-img="https://picsum.photos/400/300?random=18">
+            <div class="produto" data-nome="Pulseira Ouro" data-cod="P003" data-preco="189.90" data-img="https://picsum.photos/400/300?random=18">
                 <img src="https://picsum.photos/400/300?random=18" alt="Pulseira Ouro">
                 <h3>Pulseira Ouro</h3>
                 <p>Cod: P003 | R$ 189,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Pulseira Coração" data-cod="P004" data-preco="R$ 129,90" data-img="https://picsum.photos/400/300?random=19">
+            <div class="produto" data-nome="Pulseira Coração" data-cod="P004" data-preco="129.90" data-img="https://picsum.photos/400/300?random=19">
                 <img src="https://picsum.photos/400/300?random=19" alt="Pulseira Coração">
                 <h3>Pulseira Coração</h3>
                 <p>Cod: P004 | R$ 129,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Pulseira Charme" data-cod="P005" data-preco="R$ 139,90" data-img="https://picsum.photos/400/300?random=20">
+            <div class="produto" data-nome="Pulseira Charme" data-cod="P005" data-preco="139.90" data-img="https://picsum.photos/400/300?random=20">
                 <img src="https://picsum.photos/400/300?random=20" alt="Pulseira Charme">
                 <h3>Pulseira Charme</h3>
                 <p>Cod: P005 | R$ 139,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Pulseira Elo" data-cod="P006" data-preco="R$ 109,90" data-img="https://picsum.photos/400/300?random=24">
+            <div class="produto" data-nome="Pulseira Elo" data-cod="P006" data-preco="109.90" data-img="https://picsum.photos/400/300?random=24">
                 <img src="https://picsum.photos/400/300?random=24" alt="Pulseira Elo">
                 <h3>Pulseira Elo</h3>
                 <p>Cod: P006 | R$ 109,90</p>
@@ -305,8 +342,9 @@
     </section>
 
     <section id="contato" class="contato">
-        <h2>Entre em Contato</h2>
-        <p>Fale conosco pelo WhatsApp: <a href="https://wa.me/5599999999999">Clique aqui</a></p>
+        <h2>Seu Pedido</h2>
+        <p>Clique no botão para finalizar a compra e enviar o pedido detalhado pelo WhatsApp.</p>
+        <a href="#" target="_blank" class="btn btn-whatsapp" id="btn-finalizar-pedido" style="margin-top: 15px; font-size: 1.1rem; padding: 0.7rem 1.5rem;">Finalizar Pedido via WhatsApp (<span id="finalizar-count">0</span>)</a>
     </section>
 
     <footer>
@@ -314,63 +352,210 @@
     </footer>
 
     <div class="modal" id="modal">
-        <div class="modal-content">
+        <div class="modal-content" id="modal-produto-content">
             <span class="close-btn" id="closeModal">&times;</span>
             <img src="" alt="" id="modal-img">
             <h3 id="modal-nome"></h3>
             <p id="modal-cod"></p>
             <p id="modal-preco"></p>
             <div class="modal-buttons">
-                <button class="btn" id="modal-ver-detalhes">Ver Mais Detalhes</button> <a href="#" target="_blank" class="btn btn-whatsapp" id="btn-whatsapp-modal">Comprar via WhatsApp</a>
+                <button class="btn" id="modal-add-carrinho">Adicionar ao Carrinho</button> 
+                <a href="#" target="_blank" class="btn btn-whatsapp" id="btn-whatsapp-modal">Comprar Apenas Este via WhatsApp</a>
+            </div>
+        </div>
+
+        <div class="modal-content" id="modal-carrinho-content" style="display:none; max-width: 500px;">
+            <span class="close-btn" id="closeCarrinhoModal">&times;</span>
+            <h3 style="margin-bottom: 0;">Seu Carrinho</h3>
+            <div id="carrinho-items">
+                </div>
+            <p id="carrinho-total">Total: R$ 0,00</p>
+            <div class="modal-buttons" style="margin-top: 15px;">
+                <button class="btn" id="limpar-carrinho" style="border-color: #f00; color: #f00;">Limpar Carrinho</button>
+                <a href="#" target="_blank" class="btn btn-whatsapp" id="btn-finalizar-carrinho" style="font-size: 1rem;">Finalizar Pedido</a>
             </div>
         </div>
     </div>
 
     <script>
-        // Menu responsivo
+        // Usei um array global para armazenar os produtos do carrinho
+        let carrinho = [];
+
+        // Referências de Elementos do DOM
         const toggle = document.getElementById('menu-toggle');
         const menu = document.getElementById('menu');
-        toggle.addEventListener('click', () => {
-            menu.classList.toggle('show');
-        });
-
-        // Modal Produto
         const produtos = document.querySelectorAll('.produto');
         const modal = document.getElementById('modal');
+        const modalProdutoContent = document.getElementById('modal-produto-content');
+        const modalCarrinhoContent = document.getElementById('modal-carrinho-content');
         const modalImg = document.getElementById('modal-img');
         const modalNome = document.getElementById('modal-nome');
         const modalCod = document.getElementById('modal-cod');
         const modalPreco = document.getElementById('modal-preco');
         const closeModal = document.getElementById('closeModal');
+        const closeCarrinhoModal = document.getElementById('closeCarrinhoModal');
         const btnWhatsappModal = document.getElementById('btn-whatsapp-modal');
+        const btnAddCarrinho = document.getElementById('modal-add-carrinho');
+        const cartCount = document.getElementById('cart-count');
+        const btnFinalizarPedido = document.getElementById('btn-finalizar-pedido');
+        const carrinhoItems = document.getElementById('carrinho-items');
+        const carrinhoTotal = document.getElementById('carrinho-total');
+        const btnFinalizarCarrinho = document.getElementById('btn-finalizar-carrinho');
+        const limparCarrinho = document.getElementById('limpar-carrinho');
 
+        // Variável para armazenar o produto selecionado no modal
+        let produtoSelecionado = {};
+
+        // Funções do Carrinho
+        function updateCart() {
+            // 1. Atualiza o contador de itens
+            const totalItems = carrinho.reduce((sum, item) => sum + item.qtd, 0);
+            cartCount.textContent = totalItems;
+            document.getElementById('finalizar-count').textContent = totalItems;
+
+            // 2. Renderiza a lista de itens no modal do carrinho
+            carrinhoItems.innerHTML = '';
+            let total = 0;
+            
+            if (carrinho.length === 0) {
+                carrinhoItems.innerHTML = '<p style="text-align:center; padding: 20px;">O carrinho está vazio.</p>';
+                btnFinalizarCarrinho.style.display = 'none';
+                limparCarrinho.style.display = 'none';
+            } else {
+                btnFinalizarCarrinho.style.display = 'inline-block';
+                limparCarrinho.style.display = 'inline-block';
+                
+                carrinho.forEach(item => {
+                    const itemTotal = item.preco * item.qtd;
+                    total += itemTotal;
+
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'carrinho-item';
+                    itemElement.innerHTML = `
+                        <span>${item.qtd}x ${item.nome} (${item.cod})</span>
+                        <span>R$ ${itemTotal.toFixed(2).replace('.', ',')}</span>
+                    `;
+                    carrinhoItems.appendChild(itemElement);
+                });
+            }
+
+            // 3. Atualiza o total
+            carrinhoTotal.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
+            
+            // 4. Configura o link de finalização para o WhatsApp
+            generateWhatsAppOrder(total);
+        }
+
+        function generateWhatsAppOrder(total) {
+            let message = "Olá! Gostaria de fazer o seguinte pedido:\n\n";
+
+            if (carrinho.length === 0) {
+                message = "Olá! Gostaria de mais informações sobre seus produtos.";
+            } else {
+                carrinho.forEach(item => {
+                    const itemTotal = item.preco * item.qtd;
+                    message += `${item.qtd}x ${item.nome} (Cod: ${item.cod}) - R$ ${itemTotal.toFixed(2).replace('.', ',')}\n`;
+                });
+                message += `\n*Total do Pedido: R$ ${total.toFixed(2).replace('.', ',')}*`;
+                message += "\n\nPor favor, me informe o valor e opções de frete. Obrigado(a)!";
+            }
+            
+            const whatsappLink = `https://wa.me/5585997189301?text=${encodeURIComponent(message)}`;
+            btnFinalizarCarrinho.href = whatsappLink;
+            btnFinalizarPedido.href = whatsappLink; 
+        }
+
+        function addItemToCart(item) {
+            const existingItem = carrinho.find(p => p.cod === item.cod);
+            if (existingItem) {
+                existingItem.qtd += 1;
+            } else {
+                carrinho.push({ ...item, qtd: 1 });
+            }
+            updateCart();
+        }
+
+        function clearCart() {
+            carrinho = [];
+            updateCart();
+            closeModal.click(); // Fecha o modal após limpar
+        }
+
+        // --- Event Listeners ---
+
+        // Menu responsivo
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('show');
+        });
+
+        // Botão "Ver Detalhes" -> abre o Modal do PRODUTO
         produtos.forEach(produto => {
             produto.querySelector('.btn').addEventListener('click', e => {
                 e.preventDefault();
                 modal.classList.add('open');
-                const produtoNome = produto.dataset.nome;
-                const produtoCod = produto.dataset.cod;
-                const produtoPreco = produto.dataset.preco;
-                const produtoImg = produto.dataset.img;
+                modalCarrinhoContent.style.display = 'none';
+                modalProdutoContent.style.display = 'block';
 
-                modalImg.src = produtoImg;
-                modalNome.textContent = produtoNome;
-                modalCod.textContent = "Código: " + produtoCod;
-                modalPreco.textContent = "Preço: " + produtoPreco;
-                
-                // Configura o link do WhatsApp
-                const whatsappMessage = `Olá, tenho interesse no produto ${produtoNome} (Código: ${produtoCod}). Poderia me dar mais detalhes?`;
-                btnWhatsappModal.href = `https://wa.me/5599999999999?text=${encodeURIComponent(whatsappMessage)}`;
+                produtoSelecionado = {
+                    nome: produto.dataset.nome,
+                    cod: produto.dataset.cod,
+                    preco: parseFloat(produto.dataset.preco),
+                    img: produto.dataset.img
+                };
+
+                // Preenche o modal do produto
+                modalImg.src = produtoSelecionado.img;
+                modalNome.textContent = produtoSelecionado.nome;
+                modalCod.textContent = "Código: " + produtoSelecionado.cod;
+                modalPreco.textContent = "Preço: R$ " + produtoSelecionado.preco.toFixed(2).replace('.', ',');
+
+                // Configura o link do WhatsApp para "Comprar Apenas Este"
+                const singleItemMessage = `Olá, quero comprar *apenas* o produto ${produtoSelecionado.nome} (Cod: ${produtoSelecionado.cod}). Qual o frete?`;
+                btnWhatsappModal.href = `https://wa.me/5585997189301?text=${encodeURIComponent(singleItemMessage)}`;
             });
         });
 
+        // Botão ADICIONAR AO CARRINHO no modal do produto
+        btnAddCarrinho.addEventListener('click', () => {
+            addItemToCart(produtoSelecionado);
+            modal.classList.remove('open');
+        });
+
+        // Clique no contador do carrinho -> abre o Modal do CARRINHO
+        cartCount.addEventListener('click', () => {
+            updateCart();
+            modal.classList.add('open');
+            modalProdutoContent.style.display = 'none';
+            modalCarrinhoContent.style.display = 'block';
+        });
+        
+        // Clique no link de finalização de pedido (na seção Contato) -> abre o Modal do CARRINHO (se houver itens)
+        btnFinalizarPedido.addEventListener('click', (e) => {
+            // Se o carrinho tiver itens, o clique será tratado pelo link do whatsapp.
+            // Se não tiver, ele abre o modal para mostrar que está vazio.
+            if (carrinho.length === 0) {
+                 e.preventDefault();
+                 cartCount.click();
+            }
+        });
+
+        // Botão LIMPAR CARRINHO
+        limparCarrinho.addEventListener('click', clearCart);
+
+        // Fechar Modais
         closeModal.addEventListener('click', () => {
+            modal.classList.remove('open');
+        });
+        closeCarrinhoModal.addEventListener('click', () => {
             modal.classList.remove('open');
         });
 
         modal.addEventListener('click', e => {
             if (e.target === modal) modal.classList.remove('open');
         });
+
+        // Inicializa o carrinho ao carregar a página
+        updateCart(); 
     </script>
 </body>
 </html>
