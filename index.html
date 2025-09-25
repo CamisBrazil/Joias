@@ -80,12 +80,26 @@
         .hero p { max-width: 600px; margin: auto; font-size: 1rem; color: #333; }
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s; padding: 1rem; }
         .modal.open { opacity: 1; visibility: visible; }
-        .modal-content { background: #fff; padding: 1rem; border-radius: 12px; max-width: 450px; width: 100%; text-align: center; position: relative; }
+        
+        /* CORREÇÃO APLICADA AQUI: Permite a rolagem e limita a altura do modal de conteúdo */
+        .modal-content { 
+            background: #fff; 
+            padding: 1rem; 
+            border-radius: 12px; 
+            max-width: 450px; 
+            width: 100%; 
+            text-align: center; 
+            position: relative; 
+            max-height: 90vh; /* Limita a altura a 90% da viewport */
+            overflow-y: auto; /* Permite a rolagem vertical dentro do modal */
+        }
+        
         .modal img { max-width: 100%; border-radius: 8px; margin-bottom: 1rem; }
         .modal h3 { margin-bottom: 0.5rem; font-size: 1.4rem; color: #b8860b; }
         .modal p { font-size: 1rem; color: #333; }
         .modal-buttons { margin-top: 1rem; display: flex; justify-content: center; gap: 10px; } 
-        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 1.8rem; cursor: pointer; color: #333; }
+        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 1.8rem; cursor: pointer; color: #333; z-index: 10; } /* Z-index aumentado para ficar sobre o conteúdo */
+        
         #carrinho-items { text-align: left; margin-top: 1rem; max-height: 300px; overflow-y: auto; border-top: 1px solid #eee; padding-top: 10px;}
         .carrinho-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dotted #ccc; font-size: 0.9rem; }
         .carrinho-item span { color: #555; }
@@ -277,7 +291,7 @@
                 <button class="btn">Ver Detalhes</button>
             </div>
             
-            </div>
+        </div>
     </section>
 
     <section id="brincos" class="categoria">
@@ -497,7 +511,6 @@
                 openCartTab = document.getElementById('open-cart-tab'); 
             } catch (e) {
                 console.error("Erro ao configurar referências do DOM:", e);
-                // Permite que o código continue mesmo com erro na referência.
             }
         }
 
@@ -510,40 +523,42 @@
                 if (document.getElementById('finalizar-count')) document.getElementById('finalizar-count').textContent = totalItems;
 
                 // 2. Renderiza a lista de itens no modal do carrinho
-                carrinhoItems.innerHTML = '';
-                let total = 0;
-                
-                if (carrinho.length === 0) {
-                    carrinhoItems.innerHTML = '<p style="text-align:center; padding: 20px;">O carrinho está vazio.</p>';
-                    btnFinalizarCarrinho.style.display = 'none';
-                    limparCarrinho.style.display = 'none';
-                } else {
-                    btnFinalizarCarrinho.style.display = 'inline-block';
-                    limparCarrinho.style.display = 'inline-block';
+                if (carrinhoItems) {
+                    carrinhoItems.innerHTML = '';
+                    let total = 0;
                     
-                    carrinho.forEach(item => {
-                        const itemTotal = item.preco * item.qtd;
-                        total += itemTotal;
+                    if (carrinho.length === 0) {
+                        carrinhoItems.innerHTML = '<p style="text-align:center; padding: 20px;">O carrinho está vazio.</p>';
+                        if(btnFinalizarCarrinho) btnFinalizarCarrinho.style.display = 'none';
+                        if(limparCarrinho) limparCarrinho.style.display = 'none';
+                    } else {
+                        if(btnFinalizarCarrinho) btnFinalizarCarrinho.style.display = 'inline-block';
+                        if(limparCarrinho) limparCarrinho.style.display = 'inline-block';
+                        
+                        carrinho.forEach(item => {
+                            const itemTotal = item.preco * item.qtd;
+                            total += itemTotal;
 
-                        const itemElement = document.createElement('div');
-                        itemElement.className = 'carrinho-item';
-                        itemElement.innerHTML = `
-                            <span>${item.qtd}x ${item.nome} (Cod: ${item.cod})</span>
-                            <span>R$ ${itemTotal.toFixed(2).replace('.', ',')}</span>
-                        `;
-                        carrinhoItems.appendChild(itemElement);
-                    });
+                            const itemElement = document.createElement('div');
+                            itemElement.className = 'carrinho-item';
+                            itemElement.innerHTML = `
+                                <span>${item.qtd}x ${item.nome} (Cod: ${item.cod})</span>
+                                <span>R$ ${itemTotal.toFixed(2).replace('.', ',')}</span>
+                            `;
+                            carrinhoItems.appendChild(itemElement);
+                        });
+                    }
+
+                    // 3. Atualiza o total
+                    if(carrinhoTotal) carrinhoTotal.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
+                    
+                    // 4. Configura o link de finalização para o WhatsApp
+                    generateWhatsAppOrder(total);
                 }
-
-                // 3. Atualiza o total
-                carrinhoTotal.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
-                
-                // 4. Configura o link de finalização para o WhatsApp, incluindo a URL da imagem de CADA item.
-                generateWhatsAppOrder(total);
 
             } catch (e) {
                 console.error("Erro na função updateCart:", e);
-                // Se der erro aqui, a lógica do carrinho é desabilitada para evitar travamento.
+                // Permite que o código continue, focando na funcionalidade de venda.
             }
         }
 
@@ -567,8 +582,8 @@
             
             // Link de WhatsApp com o NOVO NÚMERO
             const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-            btnFinalizarCarrinho.href = whatsappLink;
-            btnFinalizarPedido.href = whatsappLink; 
+            if(btnFinalizarCarrinho) btnFinalizarCarrinho.href = whatsappLink;
+            if(btnFinalizarPedido) btnFinalizarPedido.href = whatsappLink; 
         }
 
         function addItemToCart(item) {
@@ -597,8 +612,8 @@
                 produto.querySelector('.btn').addEventListener('click', e => {
                     e.preventDefault();
                     modal.classList.add('open');
-                    modalCarrinhoContent.style.display = 'none';
-                    modalProdutoContent.style.display = 'block';
+                    if(modalCarrinhoContent) modalCarrinhoContent.style.display = 'none';
+                    if(modalProdutoContent) modalProdutoContent.style.display = 'block';
 
                     produtoSelecionado = {
                         nome: produto.dataset.nome,
@@ -608,14 +623,14 @@
                     };
 
                     // Preenche o modal do produto
-                    modalImg.src = produtoSelecionado.img;
-                    modalNome.textContent = produtoSelecionado.nome;
-                    modalCod.textContent = "Código: " + produtoSelecionado.cod;
-                    modalPreco.textContent = "Preço: R$ " + produtoSelecionado.preco.toFixed(2).replace('.', ',');
+                    if(modalImg) modalImg.src = produtoSelecionado.img;
+                    if(modalNome) modalNome.textContent = produtoSelecionado.nome;
+                    if(modalCod) modalCod.textContent = "Código: " + produtoSelecionado.cod;
+                    if(modalPreco) modalPreco.textContent = "Preço: R$ " + produtoSelecionado.preco.toFixed(2).replace('.', ',');
 
                     // Configura o link do WhatsApp para "Comprar Apenas Este" com o NOVO NÚMERO
                     const singleItemMessage = `Olá, quero comprar *apenas* o produto ${produtoSelecionado.nome} (Cod: ${produtoSelecionado.cod}). Link da Imagem: ${produtoSelecionado.img}. Qual o frete?`;
-                    btnWhatsappModal.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(singleItemMessage)}`;
+                    if(btnWhatsappModal) btnWhatsappModal.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(singleItemMessage)}`;
                 });
             });
 
@@ -629,8 +644,8 @@
             if(cartCount) cartCount.addEventListener('click', () => {
                 updateCart();
                 modal.classList.add('open');
-                modalProdutoContent.style.display = 'none';
-                modalCarrinhoContent.style.display = 'block';
+                if(modalProdutoContent) modalProdutoContent.style.display = 'none';
+                if(modalCarrinhoContent) modalCarrinhoContent.style.display = 'block';
             });
 
             // Clique no ícone Carrinho do Menu de Abas Mobile
