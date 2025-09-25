@@ -46,7 +46,7 @@
             background: #b8860b;
         }
 
-        /* ===== NAV MOBILE (Abas Fixas) - NOVO ESTILO ===== */
+        /* ===== NAV MOBILE (Abas Fixas) ===== */
         .mobile-tabs {
             display: none; /* Esconde por padrão */
         }
@@ -91,9 +91,10 @@
                 margin-bottom: 2px;
             }
 
-            /* Estilos de Grid 2x para mobile */
+            /* Estilo de Grid 2x para mobile (CORREÇÃO SOLICITADA) */
             .produtos {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+                /* Força duas colunas de tamanho igual com mínimo de 150px para garantir 2 por linha */
+                grid-template-columns: 1fr 1fr; 
                 gap: 1rem; 
             }
             .produto img { height: 150px; }
@@ -340,7 +341,7 @@
     <section id="contato" class="contato">
         <h2>Seu Pedido</h2>
         <p>Clique no botão para finalizar a compra e enviar o pedido detalhado pelo WhatsApp.</p>
-        <a href="#" target="_blank" class="btn btn-whatsapp" id="btn-finalizar-pedido" style="margin-top: 15px; font-size: 1.1rem; padding: 0.7rem 1.5rem;">Finalizar Pedido via WhatsApp (<span id="finalizar-count">0</span>)</a>
+        <a href="https://wa.me/5585997189301" target="_blank" class="btn btn-whatsapp" id="btn-finalizar-pedido" style="margin-top: 15px; font-size: 1.1rem; padding: 0.7rem 1.5rem;">Finalizar Pedido via WhatsApp (<span id="finalizar-count">0</span>)</a>
     </section>
 
     <footer>
@@ -379,7 +380,7 @@
             <p id="modal-preco"></p>
             <div class="modal-buttons">
                 <button class="btn" id="modal-add-carrinho">Adicionar ao Carrinho</button> 
-                <a href="#" target="_blank" class="btn btn-whatsapp" id="btn-whatsapp-modal">Comprar Apenas Este via WhatsApp</a>
+                <a href="https://wa.me/5585997189301" target="_blank" class="btn btn-whatsapp" id="btn-whatsapp-modal">Comprar Apenas Este via WhatsApp</a>
             </div>
         </div>
 
@@ -399,6 +400,7 @@
     <script>
         // Usei um array global para armazenar os produtos do carrinho
         let carrinho = [];
+        const WHATSAPP_NUMBER = "5585997189301"; // NOVO NÚMERO DO CHEFE
 
         // Referências de Elementos do DOM
         const produtos = document.querySelectorAll('.produto');
@@ -419,7 +421,7 @@
         const carrinhoTotal = document.getElementById('carrinho-total');
         const btnFinalizarCarrinho = document.getElementById('btn-finalizar-carrinho');
         const limparCarrinho = document.getElementById('limpar-carrinho');
-        const openCartTab = document.getElementById('open-cart-tab'); // Novo botão do menu de abas
+        const openCartTab = document.getElementById('open-cart-tab'); 
 
         // Variável para armazenar o produto selecionado no modal
         let produtoSelecionado = {};
@@ -478,9 +480,10 @@
                 message += "\n\nPor favor, me informe o valor e opções de frete. Obrigado(a)!";
             }
             
-            const whatsappLink = `https://wa.me/5599999999999?text=${encodeURIComponent(message)}`;
+            // Link de WhatsApp com o NOVO NÚMERO
+            const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
             btnFinalizarCarrinho.href = whatsappLink;
-            btnFinalizarPedido.href = whatsappLink; 
+            btnFinalizarPedido.href = whatsappLink; // Atualiza o botão da seção Contato (embora este já tenha o número no HTML)
         }
 
         function addItemToCart(item) {
@@ -522,9 +525,9 @@
                 modalCod.textContent = "Código: " + produtoSelecionado.cod;
                 modalPreco.textContent = "Preço: R$ " + produtoSelecionado.preco.toFixed(2).replace('.', ',');
 
-                // Configura o link do WhatsApp para "Comprar Apenas Este"
+                // Configura o link do WhatsApp para "Comprar Apenas Este" com o NOVO NÚMERO
                 const singleItemMessage = `Olá, quero comprar *apenas* o produto ${produtoSelecionado.nome} (Cod: ${produtoSelecionado.cod}). Qual o frete?`;
-                btnWhatsappModal.href = `https://wa.me/5599999999999?text=${encodeURIComponent(singleItemMessage)}`;
+                btnWhatsappModal.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(singleItemMessage)}`;
             });
         });
 
@@ -542,13 +545,13 @@
             modalCarrinhoContent.style.display = 'block';
         });
 
-        // Clique no ícone Carrinho do Menu de Abas Mobile (NOVO)
+        // Clique no ícone Carrinho do Menu de Abas Mobile
         openCartTab.addEventListener('click', (e) => {
             e.preventDefault(); 
             cartCount.click(); // Reutiliza a lógica do clique no contador
         });
         
-        // Clique no link de finalização de pedido (na seção Contato) -> abre o Modal do CARRINHO (se houver itens)
+        // Clique no link de finalização de pedido (na seção Contato)
         btnFinalizarPedido.addEventListener('click', (e) => {
             if (carrinho.length === 0) {
                  e.preventDefault();
