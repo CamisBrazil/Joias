@@ -6,6 +6,8 @@
     <title>By CamisBrazil - Semi Joias</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
 
@@ -48,120 +50,55 @@
             background: #b8860b;
         }
 
+        /* ANIMAÇÃO DE PULSO */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .pulse { animation: pulse 0.5s ease; }
+
+
+        /* ===== BOTÃO FLUTUANTE (NOVO) ===== */
+        #floating-cart-btn {
+            position: fixed;
+            bottom: 80px; /* Acima do menu de abas mobile */
+            right: 20px;
+            background: #d4af37;
+            color: #111;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: none; /* Esconde por padrão */
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1005;
+            transition: 0.3s;
+        }
+        #floating-cart-btn:hover {
+            background: #b8860b;
+            transform: scale(1.05);
+        }
+        #floating-cart-btn .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+
         /* ===== NAV MOBILE (Abas Fixas) ===== */
         .mobile-tabs {
             display: none; /* Esconde por padrão */
         }
 
-        /* ===== PRODUTOS (Desktop) ===== */
-        section.categoria { padding: 2rem 1rem; }
-        section.categoria h2 { text-align: center; margin-bottom: 1.5rem; font-size: 2rem; color: #b8860b; }
-        .produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-        .produto { background: #fff; border-radius: 16px; overflow: hidden; text-align: center; padding-bottom: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; }
-        .produto:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-        .produto img { width: 100%; height: 220px; object-fit: cover; border-bottom: 2px solid #f5d76e; }
-        .produto h3 { margin: 0.8rem 0 0.3rem; font-size: 1.2rem; }
-        .produto p { font-size: 0.95rem; color: #444; }
-        
-        /* Estilos de Botões */
-        .btn { display: inline-block; margin-top: 0.8rem; padding: 0.5rem 1rem; border: 1px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 6px; font-weight: 500; transition: 0.3s; background: none; cursor: pointer; }
-        .btn:hover { background: #d4af37; color: #111; }
-        .btn-whatsapp { background: #25D366; color: #fff; border: 1px solid #25D366; }
-        .btn-whatsapp:hover { background: #128C7E; border: 1px solid #128C7E; color: #fff; }
-        #modal-add-carrinho { background: #b8860b; color: #fff; border: 1px solid #b8860b; }
-        #modal-add-carrinho:hover { background: #d4af37; color: #111; }
-
-        /* Estilos de Modais e Conteúdo Geral */
-        header { text-align: center; padding: 2.5rem 1rem; background: #f1f1f1; }
-        header h1 { font-family: 'Great Vibes', cursive; font-size: 3rem; background: linear-gradient(45deg, #d4af37, #f5d76e, #b8860b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        header p { margin-top: 0.5rem; color: #444; }
-        .hero { padding: 2rem; text-align: center; }
-        .hero h2 { color: #b8860b; font-size: 2rem; margin-bottom: 1rem; }
-        .hero p { max-width: 600px; margin: auto; font-size: 1rem; color: #333; }
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s; padding: 1rem; }
-        .modal.open { opacity: 1; visibility: visible; }
-        
-        /* CORREÇÃO PARA ROLAGEM */
-        .modal-content { 
-            background: #fff; 
-            padding: 1rem; 
-            border-radius: 12px; 
-            max-width: 450px; 
-            width: 100%; 
-            text-align: center; 
-            position: relative; 
-            max-height: 90vh; 
-            overflow-y: auto; 
-        }
-        
-        /* Imagem dentro do modal */
-        .modal img { 
-            max-width: 100%; 
-            border-radius: 8px; 
-            margin-bottom: 1rem; 
-            max-height: 300px; /* Altura máxima para cortar a imagem */
-            object-fit: cover; /* Faz a imagem preencher o espaço, cortando o excesso */
-            width: 100%; /* Garante que a imagem ocupe a largura total disponível */
-        }
-
-        .modal h3 { margin-bottom: 0.5rem; font-size: 1.4rem; color: #b8860b; }
-        .modal p { font-size: 1rem; color: #333; }
-        .modal-buttons { margin-top: 1rem; display: flex; justify-content: center; gap: 10px; } 
-        
-        /* Botão de Fechamento Padrão (Removido o X no HTML, mas mantendo a classe para o closeCarrinhoModal) */
-        .close-btn { 
-            position: absolute; 
-            top: 10px; 
-            right: 15px; 
-            font-size: 1.8rem; 
-            cursor: pointer; 
-            color: #333; 
-            z-index: 10; 
-            display: none; /* Esconde o botão &times; original */
-        } 
-
-        /* NOVO ESTILO: Botão de Fechar Flutuante (CORRIGIDO PARA A DIREITA) */
-        #floating-close-btn {
-            position: sticky; 
-            top: 5px; 
-            right: 10px; /* Alinha à direita */
-            /* left: 100%; */ /* Removido */
-            /* transform: translateX(-100%); */ /* Removido */
-            padding: 5px 10px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid #b8860b; 
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #b8860b;
-            z-index: 100; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-left: auto; /* Garante que ele empurre para a direita */
-            display: block; /* Para margin-left: auto funcionar */
-            width: fit-content; /* Ajusta a largura ao conteúdo */
-        }
-        #floating-close-btn:hover {
-            background: #f5f5f5;
-        }
-
-
-        #carrinho-items { text-align: left; margin-top: 1rem; max-height: 300px; overflow-y: auto; border-top: 1px solid #eee; padding-top: 10px;}
-        .carrinho-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dotted #ccc; font-size: 0.9rem; }
-        .carrinho-item span { color: #555; }
-        #carrinho-total { font-weight: 700; font-size: 1.1rem; margin-top: 10px; text-align: right; color: #b8860b; }
-        .contato { text-align: center; padding: 2rem; background: #f9f9f9; }
-        .contato h2 { color: #b8860b; margin-bottom: 1rem; }
-        .contato p { color: #444; font-size: 1rem; }
-        .contato a { color: #b8860b; text-decoration: none; }
-        footer { text-align: center; padding: 1rem; font-size: 0.9rem; color: #666; background: #eee; border-top: 1px solid #ccc; }
-
-        /* ===== RESPONSIVO (MOBILE) ===== */
         @media (max-width: 768px) {
+            /* Mostra botão flutuante no mobile */
+            #floating-cart-btn {
+                display: flex;
+            }
             
-            /* Correção do Padding de Conteúdo para Dar Mais Espaço */
-            section.categoria { padding: 1rem 0.5rem; } 
-
             /* Esconde links superiores em mobile */
             .links {
                 display: none;
@@ -183,6 +120,7 @@
                 box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
             }
             .mobile-tabs a {
+                width: 25%;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -201,19 +139,74 @@
                 margin-bottom: 2px;
             }
 
-            /* Estilo de Grid 2x para mobile */
+            /* Estilo de Grid 2x para mobile (CORREÇÃO FINAL) */
+            section.categoria { padding: 1rem 0.5rem; } 
             .produtos {
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 0.8rem; 
+                /* Sobrescreve a regra de desktop para forçar 2 colunas */
+                grid-template-columns: 1fr 1fr !important; 
+                gap: 0.8rem !important; 
             }
-            .produto {
-                padding-bottom: 0.5rem; 
-            }
+            .produto { padding-bottom: 0.5rem; }
             .produto img { height: 150px; }
             .produto h3 { font-size: 1rem; }
             .produto p { font-size: 0.8rem; }
             .btn { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
         }
+
+        /* ESTILOS DE PRODUTOS E MODAIS */
+        section.categoria { padding: 2rem 1rem; }
+        section.categoria h2 { text-align: center; margin-bottom: 1.5rem; font-size: 2rem; color: #b8860b; }
+        .produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .produto { background: #fff; border-radius: 16px; overflow: hidden; text-align: center; padding-bottom: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; }
+        .produto:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .produto img { width: 100%; height: 220px; object-fit: cover; border-bottom: 2px solid #f5d76e; }
+        .produto h3 { margin: 0.8rem 0 0.3rem; font-size: 1.2rem; }
+        .produto p { font-size: 0.95rem; color: #444; }
+        .btn { display: inline-block; margin-top: 0.8rem; padding: 0.5rem 1rem; border: 1px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 6px; font-weight: 500; transition: 0.3s; background: none; cursor: pointer; }
+        .btn:hover { background: #d4af37; color: #111; }
+        .btn-whatsapp { background: #25D366; color: #fff; border: 1px solid #25D366; }
+        .btn-whatsapp:hover { background: #128C7E; border: 1px solid #128C7E; color: #fff; }
+        #modal-add-carrinho { background: #b8860b; color: #fff; border: 1px solid #b8860b; }
+        #modal-add-carrinho:hover { background: #d4af37; color: #111; }
+        header { text-align: center; padding: 2.5rem 1rem; background: #f1f1f1; }
+        header h1 { font-family: 'Great Vibes', cursive; font-size: 3rem; background: linear-gradient(45deg, #d4af37, #f5d76e, #b8860b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        header p { margin-top: 0.5rem; color: #444; }
+        .hero { padding: 2rem; text-align: center; }
+        .hero h2 { color: #b8860b; font-size: 2rem; margin-bottom: 1rem; }
+        .hero p { max-width: 600px; margin: auto; font-size: 1rem; color: #333; }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s; padding: 1rem; }
+        .modal.open { opacity: 1; visibility: visible; }
+        .modal-content { 
+            background: #fff; padding: 1rem; border-radius: 12px; max-width: 450px; width: 100%; 
+            text-align: center; position: relative; max-height: 90vh; overflow-y: auto; 
+        }
+        .modal img { 
+            max-width: 100%; border-radius: 8px; margin-bottom: 1rem; 
+            max-height: 300px; object-fit: cover; width: 100%;
+        }
+        .modal h3 { margin-bottom: 0.5rem; font-size: 1.4rem; color: #b8860b; }
+        .modal p { font-size: 1rem; color: #333; }
+        .modal-buttons { margin-top: 1rem; display: flex; justify-content: center; gap: 10px; } 
+        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 1.8rem; cursor: pointer; color: #333; z-index: 10; display: none; } 
+
+        #floating-close-btn {
+            position: sticky; top: 5px; right: 10px; padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.9); border: 1px solid #b8860b; 
+            border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600;
+            color: #b8860b; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-left: auto; display: block; width: fit-content; 
+        }
+        #floating-close-btn:hover { background: #f5f5f5; }
+
+        #carrinho-items { text-align: left; margin-top: 1rem; max-height: 300px; overflow-y: auto; border-top: 1px solid #eee; padding-top: 10px;}
+        .carrinho-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dotted #ccc; font-size: 0.9rem; }
+        .carrinho-item span { color: #555; }
+        #carrinho-total { font-weight: 700; font-size: 1.1rem; margin-top: 10px; text-align: right; color: #b8860b; }
+        .contato { text-align: center; padding: 2rem; background: #f9f9f9; }
+        .contato h2 { color: #b8860b; margin-bottom: 1rem; }
+        .contato p { color: #444; font-size: 1rem; }
+        .contato a { color: #b8860b; text-decoration: none; }
+        footer { text-align: center; padding: 1rem; font-size: 0.9rem; color: #666; background: #eee; border-top: 1px solid #ccc; }
     </style>
 </head>
 <body>
@@ -476,6 +469,11 @@
         <p>&copy; 2025 By CamisBrazil. Todos os direitos reservados.</p>
     </footer>
 
+    <div id="floating-cart-btn">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="cart-count" id="floating-cart-count">0</span>
+    </div>
+
     <nav class="mobile-tabs">
         <a href="#home" class="mobile-nav-link active">
             <span class="material-icons">home</span>
@@ -493,9 +491,9 @@
             <span class="material-icons">hdr_strong</span>
             Colares
         </a>
-        <a href="#" id="open-cart-tab" class="mobile-nav-link">
-            <span class="material-icons">shopping_cart</span>
-            Carrinho
+        <a href="#contato" class="mobile-nav-link"> 
+            <span class="material-icons">waving_hand</span>
+            Contato
         </a>
     </nav>
 
@@ -527,12 +525,16 @@
     </div>
 
     <script>
-        // Usei um array global para armazenar os produtos do carrinho
+        // Usei um array global para armazenar os produtos no carrinho
         let carrinho = [];
         const WHATSAPP_NUMBER = "5585997189301"; 
 
+        // Variável GLOBAL que armazena o produto selecionado no modal
+        let produtoSelecionado = {};
+
         // Referências de Elementos do DOM (Obtidas no load)
-        let produtos, modal, modalProdutoContent, modalCarrinhoContent, modalImg, modalNome, modalCod, modalPreco, closeModal, closeCarrinhoModal, btnWhatsappModal, btnAddCarrinho, cartCount, btnFinalizarPedido, carrinhoItems, carrinhoTotal, btnFinalizarCarrinho, limparCarrinho, openCartTab, floatingCloseBtn;
+        let produtos, modal, modalProdutoContent, modalCarrinhoContent, modalImg, modalNome, modalCod, modalPreco, closeModal, closeCarrinhoModal, btnWhatsappModal, btnAddCarrinho, cartCount, btnFinalizarPedido, carrinhoItems, carrinhoTotal, btnFinalizarCarrinho, limparCarrinho, openCartTab, floatingCloseBtn, floatingCartCount;
+
         
         // Função que configura todas as referências do DOM (para ser chamada após o carregamento)
         function setupDOMReferences() {
@@ -549,7 +551,7 @@
                 closeCarrinhoModal = document.getElementById('closeCarrinhoModal');
                 btnWhatsappModal = document.getElementById('btn-whatsapp-modal');
                 btnAddCarrinho = document.getElementById('modal-add-carrinho');
-                cartCount = document.getElementById('cart-count');
+                cartCount = document.getElementById('cart-count'); // Contador do topo (desktop)
                 btnFinalizarPedido = document.getElementById('btn-finalizar-pedido');
                 carrinhoItems = document.getElementById('carrinho-items');
                 carrinhoTotal = document.getElementById('carrinho-total');
@@ -557,6 +559,20 @@
                 limparCarrinho = document.getElementById('limpar-carrinho');
                 openCartTab = document.getElementById('open-cart-tab'); 
                 floatingCloseBtn = document.getElementById('floating-close-btn');
+                floatingCartCount = document.getElementById('floating-cart-count'); // NOVO
+                
+                const floatingCartBtn = document.getElementById('floating-cart-btn');
+                
+                // Adiciona listener para abrir o modal ao clicar no botão flutuante
+                if (floatingCartBtn) {
+                     floatingCartBtn.addEventListener('click', () => {
+                        updateCart();
+                        modal.classList.add('open');
+                        if(modalProdutoContent) modalProdutoContent.style.display = 'none';
+                        if(modalCarrinhoContent) modalCarrinhoContent.style.display = 'block';
+                    });
+                }
+
             } catch (e) {
                 console.error("Erro ao configurar referências do DOM:", e);
             }
@@ -567,9 +583,13 @@
             try {
                 // 1. Atualiza o contador de itens (Se o elemento existir)
                 const totalItems = carrinho.reduce((sum, item) => sum + item.qtd, 0);
+                
+                // Atualiza AMBOS os contadores
                 if (cartCount) cartCount.textContent = totalItems;
+                if (floatingCartCount) floatingCartCount.textContent = totalItems;
+                
                 if (document.getElementById('finalizar-count')) document.getElementById('finalizar-count').textContent = totalItems;
-
+                
                 // 2. Renderiza a lista de itens no modal do carrinho
                 if (carrinhoItems) {
                     carrinhoItems.innerHTML = '';
@@ -589,11 +609,32 @@
 
                             const itemElement = document.createElement('div');
                             itemElement.className = 'carrinho-item';
+                            // MODIFICAÇÃO CRUCIAL AQUI: Incluir miniatura e ajustar layout com flexbox inline
+                            itemElement.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;';
                             itemElement.innerHTML = `
-                                <span>${item.qtd}x ${item.nome} (Cod: ${item.cod})</span>
-                                <span>R$ ${itemTotal.toFixed(2).replace('.', ',')}</span>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <img src="${item.img}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                                    <div>
+                                        <h4 style="font-size: 0.9rem; margin-bottom: 3px;">${item.nome}</h4>
+                                        <p style="font-size: 0.8rem; color: #666;">Cód: ${item.cod} | ${item.qtd}x</p>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <p style="font-weight: bold; margin-bottom: 3px;">R$ ${itemTotal.toFixed(2).replace('.', ',')}</p>
+                                    <button class="btn-remove" data-id="${item.cod}" style="background: none; border: none; color: #f00; cursor: pointer; font-size: 0.8rem;">
+                                        <i class="fas fa-trash"></i> Remover
+                                    </button>
+                                </div>
                             `;
                             carrinhoItems.appendChild(itemElement);
+                            
+                            // Adiciona listener para o botão de remover dinamicamente (precisa ser feito após a criação)
+                            itemElement.querySelector('.btn-remove').addEventListener('click', (e) => {
+                                const codProduto = e.currentTarget.getAttribute('data-id');
+                                // Remove o item do carrinho com base no código
+                                carrinho = carrinho.filter(p => p.cod !== codProduto);
+                                updateCart(); // Atualiza a exibição
+                            });
                         });
                     }
 
@@ -634,12 +675,28 @@
         }
 
         function addItemToCart(item) {
-            const existingItem = carrinho.find(p => p.cod === item.cod);
+            // CORREÇÃO: Clonamos o item para garantir que o objeto adicionado seja uma nova instância,
+            // e não a referência global do modal, evitando o bug da repetição de item.
+            const itemParaAdicionar = { ...item }; 
+
+            const existingItem = carrinho.find(p => p.cod === itemParaAdicionar.cod);
             if (existingItem) {
                 existingItem.qtd += 1;
             } else {
-                carrinho.push({ ...item, qtd: 1 });
+                itemParaAdicionar.qtd = 1; // Garante que a quantidade inicial seja 1
+                carrinho.push(itemParaAdicionar);
             }
+            
+            // Aciona a animação de pulso em AMBOS os contadores
+            [cartCount, floatingCartCount].forEach(counter => {
+                 if (counter) {
+                    counter.classList.add('pulse');
+                    setTimeout(() => {
+                        counter.classList.remove('pulse');
+                    }, 500);
+                }
+            });
+
             updateCart();
         }
 
@@ -661,6 +718,7 @@
                     if(modalCarrinhoContent) modalCarrinhoContent.style.display = 'none';
                     if(modalProdutoContent) modalProdutoContent.style.display = 'block';
 
+                    // ATUALIZA A VARIÁVEL GLOBAL produtoSelecionado (CRÍTICO PARA O BUG)
                     produtoSelecionado = {
                         nome: produto.dataset.nome,
                         cod: produto.dataset.cod,
@@ -677,34 +735,40 @@
                     // Configura o link do WhatsApp para "Comprar Apenas Este" com o NOVO NÚMERO
                     const singleItemMessage = `Olá, quero comprar *apenas* o produto ${produtoSelecionado.nome} (Cod: ${produtoSelecionado.cod}). Link da Imagem: ${produtoSelecionado.img}. Qual o frete?`;
                     if(btnWhatsappModal) btnWhatsappModal.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(singleItemMessage)}`;
+
+                    // Listener para o botão "Adicionar ao Carrinho" do modal
+                    if(btnAddCarrinho) {
+                        const newBtnAddCarrinho = btnAddCarrinho.cloneNode(true);
+                        btnAddCarrinho.parentNode.replaceChild(newBtnAddCarrinho, btnAddCarrinho);
+                        newBtnAddCarrinho.addEventListener('click', () => {
+                            // CHAMA O ADD ITEM COM O OBJETO GLOBAL ATUALIZADO
+                            addItemToCart(produtoSelecionado); 
+                            modal.classList.remove('open');
+                        });
+                        // Atualiza a referência global do botão para o novo clone
+                        btnAddCarrinho = newBtnAddCarrinho;
+                    }
                 });
             });
 
-            // Botão ADICIONAR AO CARRINHO no modal do produto
-            if(btnAddCarrinho) btnAddCarrinho.addEventListener('click', () => {
-                addItemToCart(produtoSelecionado);
-                modal.classList.remove('open');
-            });
-
-            // Clique no contador do carrinho (topo) -> abre o Modal do CARRINHO
+            // Clique no contador do carrinho (topo DEKSTOP) -> abre o Modal do CARRINHO
             if(cartCount) cartCount.addEventListener('click', () => {
                 updateCart();
                 modal.classList.add('open');
                 if(modalProdutoContent) modalProdutoContent.style.display = 'none';
                 if(modalCarrinhoContent) modalCarrinhoContent.style.display = 'block';
             });
-
-            // Clique no ícone Carrinho do Menu de Abas Mobile
-            if(openCartTab && cartCount) openCartTab.addEventListener('click', (e) => {
-                e.preventDefault(); 
-                cartCount.click(); 
-            });
             
             // Clique no link de finalização de pedido (na seção Contato)
-            if(btnFinalizarPedido && cartCount) btnFinalizarPedido.addEventListener('click', (e) => {
+            if(btnFinalizarPedido) btnFinalizarPedido.addEventListener('click', (e) => {
                 if (carrinho.length === 0) {
                     e.preventDefault();
-                    cartCount.click();
+                    // Abre o modal de carrinho vazio usando o flutuante
+                    if (document.getElementById('floating-cart-btn')) { 
+                        document.getElementById('floating-cart-btn').click();
+                    } else if (cartCount) {
+                         cartCount.click();
+                    }
                 }
             });
 
