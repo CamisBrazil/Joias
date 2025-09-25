@@ -199,7 +199,9 @@
         #floating-close-btn:hover { background: #f5f5f5; }
 
         #carrinho-items { text-align: left; margin-top: 1rem; max-height: 300px; overflow-y: auto; border-top: 1px solid #eee; padding-top: 10px;}
-        .carrinho-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dotted #ccc; font-size: 0.9rem; }
+        .carrinho-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; } /* Estilo ajustado */
+        .carrinho-item-info { display: flex; align-items: center; gap: 10px; } /* Novo wrapper */
+        .carrinho-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; } /* Estilo para a imagem no carrinho */
         .carrinho-item span { color: #555; }
         #carrinho-total { font-weight: 700; font-size: 1.1rem; margin-top: 10px; text-align: right; color: #b8860b; }
         .contato { text-align: center; padding: 2rem; background: #f9f9f9; }
@@ -336,40 +338,76 @@
     <section id="brincos" class="categoria">
         <h2>Brincos</h2>
         <div class="produtos">
-            <div class="produto" data-nome="Brinco Luxo" data-cod="B001" data-preco="89.90" data-img="https://picsum.photos/400/300?random=6">
-                <img src="https://picsum.photos/400/300?random=6" alt="Brinco Luxo">
-                <h3>Brinco Luxo</h3>
-                <p>Cod: B001 | R$ 89,90</p>
+            <div class="produto" data-nome="Brinco Trevo Green" data-cod="10126424" data-preco="59.90" data-img="https://i.imgur.com/kz2SnRM.png">
+                <img src="https://i.imgur.com/kz2SnRM.png" alt="Brinco Trevo Green">
+                <h3>Brinco Trevo Green</h3>
+                <p>Cod: 10126424 | R$ 59,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Brinco Pérola" data-cod="B002" data-preco="99.90" data-img="https://picsum.photos/400/300?random=7">
-                <img src="https://picsum.photos/400/300?random=7" alt="Brinco Pérola">
-                <h3>Brinco Pérola</h3>
-                <p>Cod: B002 | R$ 99,90</p>
+            <div class="produto" data-nome="Brinco Argola Cruz" data-cod="54781542" data-preco="57.90" data-img="https://i.imgur.com/KbT9A71.png">
+                <img src="https://i.imgur.com/KbT9A71.png" alt="Brinco Argola Cruz">
+                <h3>Brinco Argola Cruz</h3>
+                <p>Cod: 54781542 | R$ 57,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Brinco Esmeralda" data-cod="B003" data-preco="129.90" data-img="https://picsum.photos/400/300?random=8">
-                <img src="https://picsum.photos/400/300?random=8" alt="Brinco Esmeralda">
-                <h3>Brinco Esmeralda</h3>
-                <p>Cod: B003 | R$ 129,90</p>
+            <div class="produto" data-nome="Brinco Argola Curva" data-cod="45973512" data-preco="79.90" data-img="https://i.imgur.com/cDNNqJN.png">
+                <img src="https://i.imgur.com/cDNNqJN.png" alt="Brinco Argola Curva">
+                <h3>Brinco Argola Curva</h3>
+                <p>Cod: 45973512 | R$ 79,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Brinco Cristal" data-cod="B004" data-preco="149.90" data-img="https://picsum.photos/400/300?random=9">
-                <img src="https://picsum.photos/400/300?random=9" alt="Brinco Cristal">
-                <h3>Brinco Cristal</h3>
-                <p>Cod: B004 | R$ 149,90</p>
+            <div class="produto" data-nome="Brinco Argola Rosi M" data-cod="45931802" data-preco="59.90" data-img="https://i.imgur.com/mklF63n.png">
+                <img src="https://i.imgur.com/mklF63n.png" alt="Brinco Argola Rosi M">
+                <h3>Brinco Argola Rosi M</h3>
+                <p>Cod: 45931802 | R$ 59,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Brinco Argola" data-cod="B005" data-preco="79.90" data-img="https://picsum.photos/400/300?random=10">
-                <img src="https://picsum.photos/400/300?random=10" alt="Brinco Argola">
-                <h3>Brinco Argola</h3>
-                <p>Cod: B005 | R$ 79,90</p>
+            <div class="produto" data-nome="Brinco Borboleta Thy" data-cod="60267788" data-preco="129.90" data-img="https://i.imgur.com/QAEC0CZ.png">
+                <img src="https://i.imgur.com/QAEC0CZ.png" alt="Brinco Borboleta Thy">
+                <h3>Brinco Borboleta Thy</h3>
+                <p>Cod: 60267788 | R$ 129,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
-            <div class="produto" data-nome="Brinco Zircônia" data-cod="B006" data-preco="119.90" data-img="https://picsum.photos/400/300?random=22">
-                <img src="https://picsum.photos/400/300?random=22" alt="Brinco Zircônia">
-                <h3>Brinco Zircônia</h3>
-                <p>Cod: B006 | R$ 119,90</p>
+            <div class="produto" data-nome="Brinco Coração Clin" data-cod="97562238" data-preco="67.00" data-img="https://i.imgur.com/Bjr3eKr.png">
+                <img src="https://i.imgur.com/Bjr3eKr.png" alt="Brinco Coração Clin">
+                <h3>Brinco Coração Clin</h3>
+                <p>Cod: 97562238 | R$ 67,00</p>
+                <button class="btn">Ver Detalhes</button>
+            </div>
+            <div class="produto" data-nome="Brinco Coração" data-cod="76966064" data-preco="87.90" data-img="https://i.imgur.com/rzvSmb6.png">
+                <img src="https://i.imgur.com/rzvSmb6.png" alt="Brinco Coração">
+                <h3>Brinco Coração</h3>
+                <p>Cod: 76966064 | R$ 87,90</p>
+                <button class="btn">Ver Detalhes</button>
+            </div>
+            <div class="produto" data-nome="Brinco Coração" data-cod="91791153" data-preco="29.90" data-img="https://i.imgur.com/gwLAunA.png">
+                <img src="https://i.imgur.com/gwLAunA.png" alt="Brinco Coração">
+                <h3>Brinco Coração</h3>
+                <p>Cod: 91791153 | R$ 29,90</p>
+                <button class="btn">Ver Detalhes</button>
+            </div>
+            <div class="produto" data-nome="Brinco Donatella" data-cod="95573304" data-preco="74.90" data-img="https://i.imgur.com/afG3ZsH.png">
+                <img src="https://i.imgur.com/afG3ZsH.png" alt="Brinco Donatella">
+                <h3>Brinco Donatella</h3>
+                <p>Cod: 95573304 | R$ 74,90</p>
+                <button class="btn">Ver Detalhes</button>
+            </div>
+            <div class="produto" data-nome="Brinco Infinito" data-cod="44704681" data-preco="47.00" data-img="https://i.imgur.com/PeGsvKW.png">
+                <img src="https://i.imgur.com/PeGsvKW.png" alt="Brinco Infinito">
+                <h3>Brinco Infinito</h3>
+                <p>Cod: 44704681 | R$ 47,00</p>
+                <button class="btn">Ver Detalhes</button>
+            </div>
+            <div class="produto" data-nome="Brinco Luz" data-cod="88352312" data-preco="27.00" data-img="https://i.imgur.com/URX2L7j.jpeg">
+                <img src="https://i.imgur.com/URX2L7j.jpeg" alt="Brinco Luz">
+                <h3>Brinco Luz</h3>
+                <p>Cod: 88352312 | R$ 27,00</p>
+                <button class="btn">Ver Detalhes</button>
+            </div>
+            <div class="produto" data-nome="Brinco Rose" data-cod="23137837" data-preco="49.90" data-img="https://i.imgur.com/axq5r5z.png">
+                <img src="https://i.imgur.com/axq5r5z.png" alt="Brinco Rose">
+                <h3>Brinco Rose</h3>
+                <p>Cod: 23137837 | R$ 49,90</p>
                 <button class="btn">Ver Detalhes</button>
             </div>
         </div>
@@ -607,12 +645,12 @@
                             const itemTotal = item.preco * item.qtd;
                             total += itemTotal;
 
-                            const itemElement = document.createElement('div');
-                            itemElement.className = 'carrinho-item';
+                            const cartItem = document.createElement('div');
+                            cartItem.className = 'carrinho-item';
                             // MODIFICAÇÃO CRUCIAL AQUI: Incluir miniatura e ajustar layout com flexbox inline
-                            itemElement.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;';
-                            itemElement.innerHTML = `
-                                <div style="display: flex; align-items: center; gap: 10px;">
+                            cartItem.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;';
+                            cartItem.innerHTML = `
+                                <div class="carrinho-item-info" style="display: flex; align-items: center; gap: 10px;">
                                     <img src="${item.img}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
                                     <div>
                                         <h4 style="font-size: 0.9rem; margin-bottom: 3px;">${item.nome}</h4>
@@ -626,10 +664,10 @@
                                     </button>
                                 </div>
                             `;
-                            carrinhoItems.appendChild(itemElement);
+                            carrinhoItems.appendChild(cartItem);
                             
                             // Adiciona listener para o botão de remover dinamicamente (precisa ser feito após a criação)
-                            itemElement.querySelector('.btn-remove').addEventListener('click', (e) => {
+                            cartItem.querySelector('.btn-remove').addEventListener('click', (e) => {
                                 const codProduto = e.currentTarget.getAttribute('data-id');
                                 // Remove o item do carrinho com base no código
                                 carrinho = carrinho.filter(p => p.cod !== codProduto);
