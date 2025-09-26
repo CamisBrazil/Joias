@@ -96,7 +96,7 @@
             background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
             animation: shine-wipe 3s infinite linear; 
             pointer-events: none; 
-            z-index: 10; 
+            /* REMOVIDO: z-index: 10; */ /* Remoção do z-index baixo que causava o conflito */
         }
         /* FIM EFEITO SHINE */
         
@@ -104,18 +104,25 @@
         .hero h2 {
             font-size: 2rem; 
             margin-bottom: 1rem; 
-            /* Aplica o gradiente de COR sem o 'white-space: nowrap' */
             background: linear-gradient(45deg, #d4af37, #f5d76e, #b8860b);
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
-            /* REMOVIDO: white-space: nowrap; */
             display: block; 
             text-align: center;
         }
         .hero p { color: #444; }
 
 
-        /* ===== BOTÃO FLUTUANTE (NOVO) ===== */
+        /* ===== MODAL GERAL (CORREÇÃO Z-INDEX) ===== */
+        .modal { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); 
+            display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; 
+            transition: 0.3s; padding: 1rem; 
+            z-index: 9999; /* VALOR MÁXIMO PARA RESOLVER O CONFLITO */
+        }
+        .modal.open { opacity: 1; visibility: visible; }
+        
+        /* ===== BOTÃO FLUTUANTE DE CARRINHO E MOBILE NAV ===== */
         #floating-cart-btn {
             position: fixed; bottom: 80px; right: 20px; background: #d4af37; color: #111;
             width: 55px; height: 55px; border-radius: 50%; display: none; 
@@ -125,8 +132,6 @@
         }
         #floating-cart-btn:hover { background: #b8860b; transform: scale(1.05); }
         #floating-cart-btn .cart-count { position: absolute; top: -5px; right: -5px; }
-
-        /* ===== NAV MOBILE (Abas Fixas) ===== */
         .mobile-tabs { display: none; } 
 
         @media (max-width: 768px) {
@@ -151,7 +156,7 @@
             .btn { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
         }
 
-        /* ESTILOS DE PRODUTOS E MODAIS */
+        /* ESTILOS DE PRODUTOS E MODAIS (Restante) */
         section.categoria { padding: 2rem 1rem; }
         section.categoria h2 { text-align: center; margin-bottom: 1.5rem; font-size: 2rem; } 
         .produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
@@ -159,11 +164,8 @@
         .produto:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
         .produto img { width: 100%; height: 220px; object-fit: cover; border-bottom: 2px solid #f5d76e; }
         .produto h3 { margin: 0.8rem 0 0.3rem; font-size: 1.2rem; }
-        
-        /* Estilos para o Código e Preço separados */
         .produto .product-code { font-size: 0.95rem; color: #444; margin: 0.2rem 0; line-height: 1.2; }
         .produto .product-price-display { font-size: 1.05rem; font-weight: 600; margin: 0 0 0.5rem 0; line-height: 1.2; }
-        
         .btn { display: inline-block; margin-top: 0.8rem; padding: 0.5rem 1rem; border: 1px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 6px; font-weight: 500; transition: 0.3s; background: none; cursor: pointer; }
         .btn-whatsapp { background: #25D366; color: #fff; border: 1px solid #25D366; }
         #modal-add-carrinho { background: #b8860b; color: #fff; border: 1px solid #b8860b; }
@@ -172,8 +174,6 @@
         header p { margin-top: 0.5rem; color: #444; }
         .hero { padding: 2rem; text-align: center; }
         .hero p { color: #444; }
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s; padding: 1rem; }
-        .modal.open { opacity: 1; visibility: visible; }
         .modal-content { background: #fff; padding: 1rem; border-radius: 12px; max-width: 450px; width: 100%; text-align: center; position: relative; max-height: 90vh; overflow-y: auto; }
         .modal img { max-width: 100%; border-radius: 8px; margin-bottom: 1rem; max-height: 300px; object-fit: cover; width: 100%; }
         .modal h3 { margin-bottom: 0.5rem; font-size: 1.4rem; color: #b8860b; }
@@ -520,8 +520,8 @@
 
     <section id="contato" class="contato">
         <h2>Seu Pedido</h2>
-        <p>Fale conosco pelo WhatsApp: <a href="https://wa.me/5585986759019">Clique aqui</a></p>
-        <a href="https://wa.me/5585986759019" target="_blank" class="btn btn-whatsapp" id="btn-finalizar-pedido" style="margin-top: 15px; font-size: 1.1rem; padding: 0.7rem 1.5rem;">Finalizar Pedido via WhatsApp (<span id="finalizar-count">0</span>)</a>
+        <p>Fale conosco pelo WhatsApp: <a href="https://wa.me/5585997189301">Clique aqui</a></p>
+        <a href="https://wa.me/5585997189301" target="_blank" class="btn btn-whatsapp" id="btn-finalizar-pedido" style="margin-top: 15px; font-size: 1.1rem; padding: 0.7rem 1.5rem;">Finalizar Pedido via WhatsApp (<span id="finalizar-count">0</span>)</a>
     </section>
 
     <footer>
@@ -566,7 +566,7 @@
             <p id="modal-preco"></p>
             <div class="modal-buttons">
                 <button class="btn" id="modal-add-carrinho">Adicionar ao Carrinho</button> 
-                <a href="https://wa.me/5585986759019" target="_blank" class="btn btn-whatsapp" id="btn-whatsapp-modal">Comprar Apenas Este via WhatsApp</a>
+                <a href="https://wa.me/5585997189301" target="_blank" class="btn btn-whatsapp" id="btn-whatsapp-modal">Comprar Apenas Este via WhatsApp</a>
             </div>
         </div>
 
@@ -586,7 +586,7 @@
     <script>
         // Usei um array global para armazenar os produtos no carrinho
         let carrinho = [];
-        const WHATSAPP_NUMBER = "5585986759019"; 
+        const WHATSAPP_NUMBER = "5585997189301"; 
 
         // Variável GLOBAL que armazena o produto selecionado no modal
         let produtoSelecionado = {};
@@ -724,7 +724,7 @@
                     }
                 });
                 message += `\n*Total do Pedido: R$ ${total.toFixed(2).replace('.', ',')}*`;
-                message += "\n\nObrigado(a)!";
+                message += "\n\nPor favor, me informe o valor e opções de frete. Obrigado(a)!";
             }
             
             // Link de WhatsApp com o NOVO NÚMERO
