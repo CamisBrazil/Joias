@@ -736,10 +736,10 @@
         }
 
         function generateWhatsAppOrder(total) {
-            let message = "Olá! Gostaria de fazer o seguinte pedido:\n\n";
+            let message = "Olá Camis! Gostaria de fazer o seguinte pedido:\n\n";
 
             if (carrinho.length === 0) {
-                message = "Olá! Gostaria de mais informações sobre seus produtos.";
+                message = "Olá Camis! Gostaria de mais informações sobre seus produtos.";
             } else {
                 carrinho.forEach((item, index) => {
                     const itemTotal = item.preco * item.qtd;
@@ -750,7 +750,7 @@
                     }
                 });
                 message += `\n*Total do Pedido: R$ ${total.toFixed(2).replace('.', ',')}*`;
-                message += "\n\nPor favor, me informe o valor e opções de frete. Obrigado(a)!";
+                message += "\n\nObrigado(a)!";
             }
             
             // Link de WhatsApp com o NOVO NÚMERO
